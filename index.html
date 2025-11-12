@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SDM Plantation — Wholesale Bananas</title>
+  <meta name="description" content="SDM Plantation — Farm fresh wholesale bananas. Contact for bulk orders, pricing and delivery." />
+  <meta name="keywords" content="SDM Plantation, wholesale bananas, banana supplier Karnataka, Yelakki banana, Robusta banana, Rasthali banana, banana delivery, farm fresh bananas">
+  <meta name="author" content="SDM Plantation">
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="SDM Plantation — Fresh Wholesale Bananas">
+  <meta property="og:description" content="Buy farm-fresh bananas directly from SDM Plantation. Bulk orders, transport, and wholesale supply.">
+  <meta property="og:image" content="logo.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com">
+
+  <link rel="icon" href="/assets/favicon.ico" />
+  <style>
+    :root{
+      --green:#2f9e44;
+      --dark:#0f1724;
+      --muted:#6b7280;
+      --accent:#f7d94c;
+      --max-width:1100px;
+      --card-radius:14px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:#fff;color:var(--dark);}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
+    .wrap{max-width:var(--max-width);margin:24px auto;padding:0 16px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center;text-decoration:none}
+    .brand img{width:64px;height:64px;object-fit:contain;border-radius:8px}
+    .brand h1{font-size:20px;margin:0}
+    .nav{display:flex;gap:14px;align-items:center}
+    .nav a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    .cta{background:var(--green);color:#fff;padding:8px 12px;border-radius:8px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:18px}
+    .hero .lead{font-size:20px;line-height:1.45}
+    .hero h2{font-size:34px;margin:4px 0}
+    .hero .kpis{display:flex;gap:12px;margin-top:16px}
+    .kpi{background:#f6f9f5;padding:10px 12px;border-radius:12px;text-align:center}
+    .kpi strong{display:block;font-size:18px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+    .card{border-radius:var(--card-radius);overflow:hidden;box-shadow:0 6px 18px rgba(15,23,36,0.06);border:1px solid #eef2e7}
+    .card .body{padding:12px}
+    .price{font-weight:700;color:var(--green)}
+    .form-card{background:#fff;padding:16px;border-radius:12px;border:1px solid #eef2e7}
+    form .row{display:flex;gap:8px}
+    form .col{flex:1;display:flex;flex-direction:column;margin-bottom:10px}
+    label{font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=text],input[type=tel],input[type=email],select,textarea{padding:10px;border-radius:8px;border:1px solid #e6e9ed;font-size:15px}
+    textarea{min-height:110px;resize:vertical}
+    .btn{background:var(--green);color:#fff;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid var(--green);color:var(--green)}
+    .muted{color:var(--muted);font-size:13px}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+    footer{margin-top:40px;padding:20px 0;color:var(--muted);border-top:1px solid #f0f2f1}
+    .whatsapp{position:fixed;right:16px;bottom:16px;background:#25D366;color:#fff;padding:14px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,0.15);display:flex;align-items:center;gap:8px;font-weight:700}
+    .whatsapp img{width:20px;height:20px}
+    .lang-switch{display:flex;gap:8px}
+    .lang-switch button{padding:6px 10px;border-radius:8px;border:1px solid #e6e9ed;background:transparent;cursor:pointer}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.brand img{width:54px;height:54px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Header -->
+    <header>
+      <a href="/" class="brand">
+        <img src="logo.jpg" alt="SDM Plantation logo" id="logoImg">
+        <div>
+          <h1 data-i18n="brand_name">SDM Plantation</h1>
+          <div class="muted" data-i18n="brand_tag">Wholesale Banana Supplier</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#products" data-i18n="nav_products">Products</a>
+        <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
+        <a href="#contact" class="cta" data-i18n="nav_contact">Contact Us</a>
+        <div class="lang-switch" style="margin-left:8px">
+          <button id="btn-en">EN</button>
+          <button id="btn-kn">ಕಂ</button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div>
+        <div class="muted" data-i18n="hero_sub">Farm → Market · Fresh daily</div>
+        <h2 data-i18n="hero_h1">Fresh wholesale bananas — delivered reliably</h2>
+        <p class="lead" data-i18n="hero_p">SDM Plantation supplies high-quality bananas (Robusta, Yelakki, Rasthali) in bulk to retailers, wholesalers and food processors. Minimum order: 200 kg. Local deliveries & pan-state transport.</p>
+        <div class="kpis">
+          <div class="kpi"><strong data-i18n="kpi_fresh">Fresh daily</strong><span class="muted">From farm to truck</span></div>
+          <div class="kpi"><strong data-i18n="kpi_rates">Competitive Rates</strong><span class="muted">Negotiable for regular buyers</span></div>
+          <div class="kpi"><strong data-i18n="kpi_dispatch">Quick Dispatch</strong><span class="muted">Same day/Next day</span></div>
+        </div>
+
+        <!-- Product cards -->
+        <div id="products" class="cards">
+          <article class="card"><img src="robust.jpeg" alt="Robusta bananas"><div class="body"><h3>Robusta</h3><div class="muted">Reliable, commonly used variety</div><div class="price">Price: Contact for latest rates</div></div></article>
+          <article class="card"><img src="organik-yellaki-banana-500x500.webp" alt="Yelakki bananas"><div class="body"><h3>Yelakki</h3><div class="muted">Sweet, preferred for retail</div><div class="price">Price: Contact for latest rates</div></div></article>
+          <article class="card"><img src="OIP.jpeg" alt="Rasthali bananas"><div class="body"><h3>Rasthali</h3><div class="muted">Good shelf life & quality</div><div class="price">Price: Contact for latest rates</div></div></article>
+        </div>
+      </div>
+
+      <!-- Contact / Quote form -->
+      <aside>
+        <div class="form-card" id="contact">
+          <h3>Request a Quote</h3>
+          <p class="muted">Fill below and we will contact you on WhatsApp or call.</p>
+
+         <form id="contactForm" onsubmit="sendData(event)">
+
+            <div class="row">
+              <div class="col">
+                <label for="name">Name*</label>
+                <input id="name" name="name" type="text" required>
+              </div>
+              <div class="col">
+                <label for="business_name">Business name</label>
+                <input id="business_name" name="business_name" type="text">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="phone">Phone*</label>
+                <input id="phone" name="phone" type="tel" required placeholder="+91 98xxxx">
+              </div>
+              <div class="col">
+                <label for="city">City</label>
+                <input id="city" name="city" type="text">
+              </div>
+            </div>
+
+            <div class="col">
+              <label for="address">Delivery Address*</label>
+              <textarea id="address" name="address" required placeholder="Full delivery address with landmark"></textarea>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="variety">Variety</label>
+                <select id="variety" name="variety">
+                  <option value="Robusta">Robusta</option>
+                  <option value="Yelakki">Yelakki</option>
+                  <option value="Rasthali">Rasthali</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="quantity_kg">Quantity (kg)</label>
+                <input id="quantity_kg" name="quantity_kg" type="text" placeholder="e.g. 500">
+              </div>
+            </div>
+
+            <div class="col">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Delivery date, packing, or other notes"></textarea>
+            </div>
+
+            <div style="margin:8px 0" class="muted">
+              <label><input type="checkbox" id="consent" name="consent" value="1"> I agree to be contacted about my inquiry.</label>
+            </div>
+
+            <div style="display:flex;gap:8px;align-items:center">
+              <button type="submit" class="btn">Send Inquiry</button>
+              <button type="button" id="callBtn" class="btn secondary">Call / WhatsApp</button>
+            </div>
+
+            <p id="formMessage" class="muted" style="margin-top:10px"></p>
+          </form>
+        </div>
+
+        <div style="margin-top:12px;text-align:center;font-size:13px" class="muted">
+          <strong>Note:</strong> Minimum order 200 kg. For urgent orders call or WhatsApp.
+        </div>
+      </aside>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section style="margin-top:40px;text-align:center">
+      <h3>Why Choose SDM Plantation?</h3>
+      <p class="muted">Trusted by 100+ wholesalers and retailers across Karnataka for quality and reliability.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px">
+        <div class="card"><div class="body"><strong>✅ Farm Direct</strong><br>Bananas sourced directly from our own farms.</div></div>
+        <div class="card"><div class="body"><strong>🚚 Fast Delivery</strong><br>Next-day dispatch for most bulk orders.</div></div>
+        <div class="card"><div class="body"><strong>📦 Consistent Supply</strong><br>We maintain regular stock all year round.</div></div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <h3 id="gallery" style="margin-top:28px">Gallery</h3>
+    <div class="gallery"></div>
+
+    <!-- Footer -->
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap">
+        <div style="max-width:320px">
+          <strong>SDM Plantation</strong><br>
+          <span class="muted">Wholesale banana suppliers — Local & interstate deliveries</span>
+          <p style="margin-top:10px;font-size:14px;line-height:1.5">
+            <strong>Address:</strong><br>
+            SDM Plantation,<br>
+            Near Basavanahalli Road,<br>
+            Chikkamagaluru, Karnataka – 577101, India<br>
+            📍 <a href="https://maps.google.com/?q=SDM+Plantation+Chikkamagaluru" target="_blank">View on Google Maps</a>
+          </p>
+        </div>
+        <div style="font-size:14px">
+          <p><strong>📞 Phone:</strong> <span id="phoneText">+91 8553334247</span></p>
+          <p><strong>📧 Email:</strong> <a href="mailto:sdmplantation@gmail.com">sdmplantation@gmail.com</a></p>
+          <p><strong>📸 Instagram:</strong> <a href="https://instagram.com/sdm_plantation" target="_blank">@sdm_plantation</a></p>
+          <p><strong>🕒 Working hours:</strong> 6 AM – 8 PM (Mon–Sat)</p>
+        </div>
+        <div style="font-size:14px">
+          <p><strong>Quick Links</strong></p>
+          <p><a href="#products">Products</a></p>
+          <p><a href="#gallery">Gallery</a></p>
+          <p><a href="#contact">Contact</a></p>
+        </div>
+      </div>
+      <div style="margin-top:20px;text-align:center;color:#9ca3af;font-size:13px;border-top:1px solid #f0f2f1;padding-top:10px">
+        © <span id="year"></span> SDM Plantation · All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a class="whatsapp" id="waLink" href="#" target="_blank" rel="noopener">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="wa"><span>Chat</span>
+    </a>
+
+    <!-- Scroll to Top -->
+    <button id="topBtn" style="display:none;position:fixed;bottom:80px;right:16px;background:#2f9e44;color:#fff;padding:10px;border:none;border-radius:999px;cursor:pointer;font-size:18px">↑</button>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
