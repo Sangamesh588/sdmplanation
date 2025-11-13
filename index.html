@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SDB Plantation — Wholesale Bananas</title>
   <meta name="description" content="SDB Plantation — Farm fresh wholesale bananas. Contact for bulk orders, pricing and delivery." />
-  <meta name="keywords" content="SDB Plantation, wholesale bananas, banana supplier Karnataka, Yelakki banana, Robusta banana, Rasthali banana, banana delivery, farm fresh bananas">
-  <meta name="author" content="SDB Plantation">
-
   <link rel="icon" href="/assets/favicon.ico" />
 
   <style>
@@ -18,10 +15,8 @@
       --accent:#f7d94c;
       --max-width:1100px;
       --card-radius:14px;
-      --glass: rgba(255,255,255,0.8);
       font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;background:#fff;color:var(--dark);}
     a{color:inherit;text-decoration:none}
@@ -37,13 +32,10 @@
 
     /* layout */
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;margin-top:18px}
-    .hero .lead{font-size:18px;line-height:1.45}
+    .lead{font-size:18px;line-height:1.45}
     .hero h2{font-size:32px;margin:4px 0}
-
     .kpis{display:flex;gap:12px;margin-top:16px}
     .kpi{background:#f6f9f5;padding:10px 12px;border-radius:12px;text-align:center}
-    .kpi strong{display:block;font-size:18px}
-
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:18px;align-items:start}
     .card{border-radius:var(--card-radius);overflow:hidden;box-shadow:0 6px 18px rgba(15,23,36,0.06);border:1px solid #eef2e7;background:#fff;display:flex;flex-direction:column}
     .card .media{height:180px;overflow:hidden}
@@ -59,27 +51,24 @@
     input[type=text],input[type=tel],input[type=email],select,textarea{padding:10px;border-radius:10px;border:1px solid #e6e9ed;font-size:15px;background:#fff}
     textarea{min-height:110px;resize:vertical}
 
-    /* modern address box */
-    .address-modern{padding:12px;border-radius:12px;border:1px solid rgba(15,23,36,0.08);background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.9));box-shadow:0 6px 18px rgba(16,24,40,0.04);}
+    /* modern small address */
+    .address-row input{width:100%;}
 
     .btn{background:var(--green);color:#fff;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
     .btn.secondary{background:transparent;border:1px solid var(--green);color:var(--green)}
     .muted{color:var(--muted);font-size:13px}
     .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
-
     footer{margin-top:40px;padding:20px 0;color:var(--muted);border-top:1px solid #f0f2f1}
-
     .whatsapp{position:fixed;right:16px;bottom:16px;background:#25D366;color:#fff;padding:14px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,0.15);display:flex;align-items:center;gap:8px;font-weight:700}
     .whatsapp img{width:20px;height:20px}
 
     /* cart drawer */
     .cart-btn{position:fixed;right:16px;bottom:86px;background:var(--accent);padding:12px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,0.12);font-weight:800;color:#111;cursor:pointer}
-    .cart-drawer{position:fixed;right:16px;bottom:150px;width:340px;max-height:70vh;background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(15,23,36,0.12);overflow:auto;border:1px solid #eef2e7;padding:12px;display:none;flex-direction:column;gap:8px}
+    .cart-drawer{position:fixed;right:16px;bottom:150px;width:360px;max-height:70vh;background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(15,23,36,0.12);overflow:auto;border:1px solid #eef2e7;padding:12px;display:none;flex-direction:column;gap:8px}
     .cart-item{display:flex;gap:10px;align-items:center;border-bottom:1px dashed #eef2e7;padding:8px 0}
     .cart-item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
     .qty-controls{display:flex;gap:6px;align-items:center}
     .small{font-size:13px;color:var(--muted)}
-
     .cart-empty{padding:18px;text-align:center;color:var(--muted)}
 
     @media (max-width:900px){.hero{grid-template-columns:1fr}.brand img{width:54px;height:54px}}
@@ -120,6 +109,7 @@
         <div class="muted" data-i18n="hero_sub">Farm → Market · Fresh daily</div>
         <h2 data-i18n="hero_h1">Fresh wholesale bananas — delivered reliably</h2>
         <p class="lead" data-i18n="hero_p">SDB Plantation supplies high-quality bananas (Robusta, Yelakki, Red, Narendra, Karpura) in bulk to retailers, wholesalers and food processors. Local deliveries & pan-state transport.</p>
+
         <div class="kpis">
           <div class="kpi"><strong data-i18n="kpi_fresh">Fresh daily</strong><span class="muted">From farm to truck</span></div>
           <div class="kpi"><strong data-i18n="kpi_rates">Competitive Rates</strong><span class="muted">Negotiable for regular buyers</span></div>
@@ -128,7 +118,6 @@
 
         <!-- Product cards -->
         <div id="products" class="cards">
-          <!-- Card template includes price and add-to-cart -->
           <article class="card" data-id="robusta" data-name="Robusta" data-price="35">
             <div class="media"><img src="robust.jpeg" alt="Robusta bananas"></div>
             <div class="body">
@@ -208,11 +197,11 @@
             <div class="row">
               <div class="col">
                 <label for="name" data-i18n="label_name">Name*</label>
-                <input id="name" name="name" type="text" required>
+                <input id="name" name="name" type="text" required placeholder="Name">
               </div>
               <div class="col">
                 <label for="business_name" data-i18n="label_business">Business name</label>
-                <input id="business_name" name="business_name" type="text">
+                <input id="business_name" name="business_name" type="text" placeholder="Business name (optional)">
               </div>
             </div>
 
@@ -223,19 +212,33 @@
               </div>
               <div class="col">
                 <label for="city" data-i18n="label_city">City</label>
-                <input id="city" name="city" type="text">
+                <input id="city" name="city" type="text" placeholder="City">
               </div>
             </div>
 
-            <div class="col">
+            <!-- Address field now small like the name box -->
+            <div class="col address-row">
               <label for="address" data-i18n="label_address">Delivery Address*</label>
-              <div class="address-modern">
-                <textarea id="address" name="address" required placeholder="Full delivery address with landmark (make it precise for faster delivery)"></textarea>
-                <div style="margin-top:8px;font-size:13px;color:var(--muted)" data-i18n="address_tip">Tip: include district and nearest landmark.</div>
-              </div>
+              <input id="address" name="address" type="text" required placeholder="Full address with landmark">
+              <div style="margin-top:8px;font-size:13px;color:var(--muted)" data-i18n="address_tip">Tip: include district and nearest landmark.</div>
             </div>
 
-            
+            <div class="row">
+              <div class="col">
+                <label for="variety" data-i18n="label_variety">Variety</label>
+                <select id="variety" name="variety">
+                  <option value="Robusta">Robusta</option>
+                  <option value="Yelakki">Yelakki</option>
+                  <option value="Rasthali">Rasthali</option>
+                  <option value="karpura">Karpura</option>
+                  <option value="narendra">Narendra</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="quantity_kg" data-i18n="label_quantity">Quantity (kg)</label>
+                <input id="quantity_kg" name="quantity_kg" type="text" placeholder="e.g. 500">
+              </div>
+            </div>
 
             <div class="col">
               <label for="message" data-i18n="label_message">Message</label>
@@ -306,7 +309,6 @@
       <div style="margin-top:20px;text-align:center;color:#9ca3af;font-size:13px;border-top:1px solid #f0f2f1;padding-top:10px">
         © <span id="year"></span> SDB Plantation · All rights reserved, prepared by - sangamesh nidode
       </div>
-     
     </footer>
 
     <!-- Floating WhatsApp -->
@@ -336,43 +338,41 @@
     <button id="topBtn" style="display:none;position:fixed;bottom:80px;right:16px;background:#2f9e44;color:#fff;padding:10px;border:none;border-radius:999px;cursor:pointer;font-size:18px">↑</button>
   </div>
 
-
   <script>
   document.addEventListener('DOMContentLoaded', ()=>{
-    // i18n translations (EN / KN)
+    // --- i18n small translations (kn) ---
     const translations = {
       kn: {
         brand_name: 'ಎಸ್.ಡಿ.ಬಿ ಪ್ಲಾಂಟೇಶನ್',
-        brand_tag: 'ಕಥೆ: ಕಿಲ್ಲಾವರು - ಹೋಲ್ಸೇಲ್ ಬನಾನಾಸ್',
+        brand_tag: 'ಹೋಲ್ಸೇಲ್ ಬನಾನಾಸ್',
         nav_products: 'ಉತ್ಪನ್ನಗಳು',
         nav_gallery: 'ಗ್ಯಾಲರಿ',
         nav_contact: 'ಸಂಪರ್ಕ',
         hero_sub: 'ಫಾರ್ಮ್ → ಮಾರುಕಟ್ಟೆ · ತಾಜಾ ಪ್ರತಿದಿನ',
         hero_h1: 'ತಾಜಾ ಬನಾನಾ — ವಿಶ್ವಾಸಾರ್ಹವಾಗಿ ವಿತರಣೆ',
-        hero_p: 'SDB ಪ್ಲಾಂಟೇಶನ್ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಬನಾನಾ (ರೊಬುಸ್ಟಾ, ಯೆಲ್ಲಕ್ಕಿ, ರெட், ನರೇಂದ್ರ, ಕಾರ್ಪುರ) ಪೂರೈಸುತ್ತದೆ.',
+        hero_p: 'SDB ಪ್ಲಾಂಟೇಶನ್ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಬನಾನಾ ಪೂರೈಸುತ್ತದೆ.',
         prod_robusta: 'ರೊಬುಸ್ಟಾ',
         prod_yelakki: 'ಯೆಲ್ಲಕ್ಕಿ',
         prod_red: 'ರೆಡ್ ಬನಾನಾ',
         prod_karpura: 'ಕಾರ್ಪುರ',
         prod_narendra: 'ನರೇಂದ್ರ',
         form_title: 'ಉಲ್ಲೇಖಕ್ಕಾಗಿ ವಿನಂತಿ',
-        form_sub: 'ಕೆಳಗಿನ ಫಾರ್ಮ್ ಭರ್ತಿ ಮಾಡಿ — ನಾವು ವಾಟ್ಸಪ್/ಕಾಲ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸೋಣ.',
+        form_sub: 'ಕೆಳಗಿನ ಫಾರ್ಮ್ ಭರ್ತಿ ಮಾಡಿ — ನಾವು ಸಂಪರ್ಕಿಸುತ್ತೇವೆ.',
         label_name: 'ಹೆಸರು*',
-        label_business: 'ವ್ಯವಹಾರದ ಹೆಸರು',
-        label_phone: 'ತெರೆದ',
+        label_business: 'ವ್ಯಾಪಾರದ ಹೆಸರು',
+        label_phone: 'ಫೋನ್*',
         label_city: 'ನಗರ',
-        label_address: 'ವಿತರಣೆ ವಿಳಾಸ*',
-        address_tip: 'ಸೂಚನೆ: ತಾಲೂಕು ಮತ್ತು ಹತ್ತಿರದ ಲ್ಯಾಂಡ್‍ಮಾರ್ಕ್ ಸೇರಿಸಿ.',
-        label_variety: 'ಬಳಕೆ',
+        label_address: 'ವಿಳಾಸ*',
+        address_tip: 'ಟಿಪ್: ಜಿಲ್ಲೆ ಮತ್ತು ಹತ್ತಿರದ ಲ್ಯಾಂಡ್‍ಮಾರ್ಕ್ ಸೇರಿಸಿ.',
+        label_variety: 'ಬಳವಡೆ',
         label_quantity: 'ಪ್ರಮಾಣ (ಕೆಜಿ)',
         label_message: 'ಸಂದೇಶ',
-        consent_text: 'ನನ್ನ ವಿಚಾರಣೆ ಕುರಿತು ಸಂಪರ್ಕಿಸಲು ನಾನು ಒಪ್ಪುತ್ತೇನೆ.',
-        why_title: 'ಯಾಕೆ SDB ಪ್ಲಾಂಟೇಶನ್?',
-        why_sub: 'ಕರ್ಣಾಟಕಾದಲ್ಲಿ 100+ ವಹಿವಾಟುಕಾರರು ಮತ್ತು ರೀಟೈಲರ್‍ಗಳಿಗೆ ವಿಶ್ವಾಸಾರ್ಹ.' ,
+        consent_text: 'ನನ್ನ ವಿಚಾರಣೆಗಾಗಿ ಸಂಪರ್ಕಿಸಬಹುದು.',
+        why_title: 'ಏಕೆ SDB?',
+        why_sub: '100+ ವಿತರಣಾ ಗ್ರಾಹಕರು ನಮ್ಮನ್ನು ನಂಬುತ್ತಾರೆ.',
         gallery_title: 'ಗ್ಯಾಲರಿ',
         wa_chat: 'ಚಾಟ್'
-      },
-      en: {}
+      }
     };
 
     function setLang(lang){
@@ -382,37 +382,50 @@
         if(lang === 'kn' && translations.kn[key]) el.textContent = translations.kn[key];
         else el.textContent = el.getAttribute('data-i18n-default') || el.textContent;
       });
-      // change WA text
       document.getElementById('waText').textContent = lang==='kn' ? translations.kn.wa_chat : 'Chat';
     }
-
-    // store default text into data-i18n-default so switching back works
+    // save defaults
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       if(!el.getAttribute('data-i18n-default')) el.setAttribute('data-i18n-default', el.textContent.trim());
     });
-
     document.getElementById('btn-kn').addEventListener('click', ()=> setLang('kn'));
     document.getElementById('btn-en').addEventListener('click', ()=> setLang('en'));
 
-    // basic helpers
+    // --- helpers & cart ---
     const rupee = (n)=> '₹' + Number(n).toLocaleString('en-IN', {maximumFractionDigits:2});
-
-    // Cart state persisted in localStorage
     const CART_KEY = 'sdb_cart_v1';
     let cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}');
+    const BACKEND_BASE = 'http://localhost:4000'; // change if your server runs elsewhere
 
-    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); renderCart(); }
+    function saveCartLocal(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); renderCart(); }
+
+    async function saveDraftToBackend(){
+      // save a lightweight draft (so admin sees cart quickly)
+      try{
+        const payload = { items: Object.values(cart), createdAt:new Date().toISOString() };
+        await fetch(BACKEND_BASE + '/api/orders/draft', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+        // no need to await response data
+      }catch(err){
+        console.warn('draft save failed', err);
+      }
+    }
 
     function addToCart(id, name, price, qty, img){
       qty = Number(qty);
       if(!qty || qty <= 0) return;
       if(!cart[id]) cart[id] = {id,name,price:Number(price),qty, img};
       else cart[id].qty += qty;
-      saveCart();
+      saveCartLocal();
+      // autosave draft to backend (non-blocking)
+      saveDraftToBackend();
     }
 
-    function removeFromCart(id){ delete cart[id]; saveCart(); }
-    function updateQty(id, qty){ if(cart[id]){ cart[id].qty = Number(qty); if(cart[id].qty<=0) removeFromCart(id); saveCart(); }}
+    function removeFromCart(id){ delete cart[id]; saveCartLocal(); saveDraftToBackend(); }
+    function updateQty(id, qty){ if(cart[id]){ cart[id].qty = Number(qty); if(cart[id].qty<=0) removeFromCart(id); saveCartLocal(); saveDraftToBackend(); }}
 
     function renderCart(){
       const items = Object.values(cart);
@@ -423,7 +436,8 @@
       cartItems.innerHTML = '';
       if(items.length===0){ cartEmptyMsg.style.display='block'; cartFooter.style.display='none'; cartCount.textContent = 0; document.getElementById('cartTotal').textContent = rupee(0); return; }
       cartEmptyMsg.style.display='none'; cartFooter.style.display='block';
-      let total = 0; items.forEach(it=>{
+      let total = 0;
+      items.forEach(it=>{
         const row = document.createElement('div'); row.className='cart-item';
         row.innerHTML = `
           <img src="${it.img||'logo.jpg'}" alt="${it.name}">
@@ -450,7 +464,7 @@
       cartCount.textContent = items.reduce((s,i)=>s+i.qty,0);
     }
 
-    // wire add to cart buttons using delegation
+    // delegate add-to-cart
     document.getElementById('products').addEventListener('click', (e)=>{
       const btn = e.target.closest('.add-cart');
       if(!btn) return;
@@ -464,76 +478,95 @@
       addToCart(id,name,price, qty, img);
     });
 
-    // cart drawer toggles
+    // cart drawer
     const openCartBtn = document.getElementById('openCart');
     const cartDrawer = document.getElementById('cartDrawer');
     document.getElementById('closeCart').addEventListener('click', ()=>cartDrawer.style.display='none');
     openCartBtn.addEventListener('click', ()=> cartDrawer.style.display = cartDrawer.style.display==='flex' ? 'none':'flex');
 
-    // delegate quantity & remove inside cart
+    // cart quantity / remove actions
     document.getElementById('cartItems').addEventListener('click', (e)=>{
       if(e.target.dataset.remove){ removeFromCart(e.target.dataset.remove); return; }
       if(e.target.dataset.action==='inc'){ const id = e.target.dataset.id; updateQty(id, cart[id].qty+1); return; }
       if(e.target.dataset.action==='dec'){ const id = e.target.dataset.id; updateQty(id, cart[id].qty-1); return; }
     });
-
     document.getElementById('cartItems').addEventListener('input', (e)=>{
       if(e.target.tagName==='INPUT' && e.target.type==='number'){
         const id = e.target.dataset.id; updateQty(id, Number(e.target.value));
       }
     });
+    document.getElementById('clearCart').addEventListener('click', ()=>{ cart = {}; saveCartLocal(); });
 
-    document.getElementById('clearCart').addEventListener('click', ()=>{ cart = {}; saveCart(); });
-
-    document.getElementById('checkoutBtn').addEventListener('click', ()=>{
-      const phoneText = document.getElementById('phoneText').textContent || '+918553334247';
-      const phone = (phoneText.replace(/[^0-9]/g,'') || '918553334247');
+    // --- submit final order to backend ---
+    async function submitFinalOrder(customerInfo){
+      // build order
       const items = Object.values(cart);
-      if(items.length===0){ alert('Your cart is empty'); return; }
-      let msg = 'Order from SDB Plantation%0A';
-      items.forEach(i=> msg += `${i.name} - ${i.qty} kg - ${encodeURIComponent('₹')}${i.price*i.qty}%0A`);
-      msg += `%0ASubtotal: ${document.getElementById('cartTotal').textContent}`;
-      const wa = `https://wa.me/${phone}?text=${msg}`;
-      window.open(wa, '_blank');
+      if(items.length===0) throw new Error('Cart empty');
+      const payload = {
+        customer: customerInfo,
+        items,
+        subtotal: items.reduce((s,i)=>s + i.price*i.qty,0),
+        createdAt: new Date().toISOString()
+      };
+      const res = await fetch(BACKEND_BASE + '/api/orders', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok) throw new Error('server error');
+      const data = await res.json();
+      return data; // expected { orderId: '...' }
+    }
+
+    document.getElementById('checkoutBtn').addEventListener('click', async ()=>{
+      try{
+        // gather customer info (if provided)
+        const customer = {
+          name: document.getElementById('name').value.trim() || 'Anonymous',
+          phone: document.getElementById('phone').value.trim() || document.getElementById('phoneText').textContent.trim(),
+          address: document.getElementById('address').value.trim() || '',
+        };
+        // simple validation
+        if(!customer.phone){ alert('Please provide phone'); return; }
+        const result = await submitFinalOrder(customer);
+        // on success open whatsapp with order id & summary
+        const items = Object.values(cart);
+        let msg = `Order confirmed (id: ${result.orderId})%0A`;
+        items.forEach(i=> msg += `${i.name} - ${i.qty} kg - ${encodeURIComponent('₹')}${i.price*i.qty}%0A`);
+        msg += `%0ASubtotal: ${document.getElementById('cartTotal').textContent}`;
+        const phone = customer.phone.replace(/[^0-9]/g,'');
+        // clear cart after placing
+        cart = {}; saveCartLocal();
+        // open whatsapp
+        const wa = `https://wa.me/${phone}?text=${msg}`;
+        window.open(wa, '_blank');
+        alert('Order placed successfully. Order ID: ' + result.orderId);
+      }catch(err){
+        console.error(err);
+        alert('Failed to place order: ' + (err.message || 'server error'));
+      }
     });
 
-    // restore cart on load
-    renderCart();
-
-    // form handling
-    document.getElementById('contactForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      if(!name){ document.getElementById('formMessage').textContent='Please enter your name'; return; }
-      document.getElementById('formMessage').textContent='Thank you — we will contact you soon.';
-      e.target.reset();
-    });
-
-    // Call / WhatsApp button opens WA chat with phone and (optional) cart summary
+    // call / whatsapp button: open chat with admin + include cart summary
     document.getElementById('callBtn').addEventListener('click', ()=>{
-      const phoneText = document.getElementById('phoneText').textContent || '+918553334247';
-      const phone = phoneText.replace(/[^0-9]/g,'');
-      // include cart summary if exists
+      const adminPhone = document.getElementById('phoneText').textContent.replace(/[^0-9]/g,'') || '918553334247';
       const items = Object.values(cart);
-      let msg = items.length? 'Order inquiry from website%0A':'';
+      let msg = items.length ? 'Order inquiry from website%0A' : '';
       items.forEach(i=> msg += `${i.name} - ${i.qty} kg - ${encodeURIComponent('₹')}${i.price*i.qty}%0A`);
-      const wa = `https://wa.me/${phone}?text=${msg}`;
+      const wa = `https://wa.me/${adminPhone}?text=${msg}`;
       window.open(wa, '_blank');
     });
 
     // set WA floating link
     document.getElementById('waLink').href = 'https://wa.me/918553334247';
 
-    // year and scroll
+    // restore & render
+    renderCart();
     document.getElementById('year').textContent = new Date().getFullYear();
-    const topBtn = document.getElementById('topBtn');
-    window.addEventListener('scroll', ()=>{ topBtn.style.display = window.scrollY>300 ? 'block':'none' });
-    topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
 
-    // ensure cart renders when storage changes (other tabs)
+    // keep cart in sync across tabs
     window.addEventListener('storage', ()=>{ cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}'); renderCart(); });
   });
   </script>
 </body>
 </html>
-
