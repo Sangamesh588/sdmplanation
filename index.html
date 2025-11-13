@@ -91,6 +91,58 @@
     .lang-switch{display:flex;gap:8px}
     .lang-switch button{padding:6px 10px;border-radius:8px;border:1px solid #e6e9ed;background:transparent;cursor:pointer}
     @media (max-width:900px){.hero{grid-template-columns:1fr}.brand img{width:54px;height:54px}}
+    /* Mobile Fix — Prevent text merging & fix layout */
+@media (max-width: 600px) {
+
+  .hero {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .brand h1 {
+    font-size: 18px;
+  }
+
+  .hero h2 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .lead {
+    font-size: 16px !important;
+  }
+
+  .cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card img {
+    height: 180px;
+    object-fit: cover;
+  }
+
+  form .row {
+    flex-direction: column;
+  }
+
+  .kpis {
+    flex-direction: column;
+  }
+
+  header {
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  textarea {
+    font-size: 14px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -276,6 +328,7 @@
 
 </body>
 </html>
+
 
 
 
