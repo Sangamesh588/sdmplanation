@@ -107,6 +107,10 @@
         <a href="#products" data-i18n="nav_products">Products</a>
         <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
         <a href="#contact" class="cta" data-i18n="nav_contact">Contact Us</a>
+        <div class="lang-switch" style="margin-left:8px">
+          <button id="btn-en">EN</button>
+          <button id="btn-kn">ಕನ್ನಡ</button>
+        </div>
       </nav>
     </header>
 
@@ -128,12 +132,12 @@
           <article class="card" data-id="robusta" data-name="Robusta" data-price="35">
             <div class="media"><img src="robust.jpeg" alt="Robusta bananas"></div>
             <div class="body">
-              <h3>Robusta</h3>
+              <h3 data-i18n="prod_robusta">Robusta</h3>
               <div class="muted">Reliable, commonly used variety</div>
               <div class="price">₹35 / kg</div>
               <div style="margin-top:auto;display:flex;gap:8px;align-items:center">
                 <input type="number" class="item-qty" min="1" value="10" style="width:90px;padding:8px;border-radius:8px;border:1px solid #e6e9ed">
-                <button class="btn add-cart">Add to cart</button>
+                <button class="btn add-cart" aria-label="Add Robusta to cart">Add to cart</button>
               </div>
             </div>
           </article>
@@ -141,7 +145,7 @@
           <article class="card" data-id="yelakki" data-name="Yelakki" data-price="60">
             <div class="media"><img src="organik-yellaki-banana-500x500.webp" alt="Yelakki bananas"></div>
             <div class="body">
-              <h3>Yelakki</h3>
+              <h3 data-i18n="prod_yelakki">Yelakki</h3>
               <div class="muted">Sweet, preferred for retail</div>
               <div class="price">₹60 / kg</div>
               <div style="margin-top:auto;display:flex;gap:8px;align-items:center">
@@ -154,7 +158,7 @@
           <article class="card" data-id="red" data-name="Red Banana" data-price="48">
             <div class="media"><img src="red bananas.webp" alt="Red bananas"></div>
             <div class="body">
-              <h3>Red Banana</h3>
+              <h3 data-i18n="prod_red">Red Banana</h3>
               <div class="muted">Good shelf life & quality</div>
               <div class="price">₹48 / kg</div>
               <div style="margin-top:auto;display:flex;gap:8px;align-items:center">
@@ -167,7 +171,7 @@
           <article class="card" data-id="karpura" data-name="Karpura" data-price="40">
             <div class="media"><img src="karpura.jpeg" alt="Karpura bananas"></div>
             <div class="body">
-              <h3>Karpura</h3>
+              <h3 data-i18n="prod_karpura">Karpura</h3>
               <div class="muted">Good shelf life & quality</div>
               <div class="price">₹40 / kg</div>
               <div style="margin-top:auto;display:flex;gap:8px;align-items:center">
@@ -180,7 +184,7 @@
           <article class="card" data-id="narendra" data-name="Narendra" data-price="38">
             <div class="media"><img src="nendra.jpeg" alt="Narendra bananas"></div>
             <div class="body">
-              <h3>Narendra</h3>
+              <h3 data-i18n="prod_narendra">Narendra</h3>
               <div class="muted">Good shelf life & quality</div>
               <div class="price">₹38 / kg</div>
               <div style="margin-top:auto;display:flex;gap:8px;align-items:center">
@@ -196,44 +200,44 @@
       <!-- Contact / Quote form -->
       <aside>
         <div class="form-card" id="contact">
-          <h3>Request a Quote</h3>
-          <p class="muted">Fill below and we will contact you on WhatsApp or call.</p>
+          <h3 data-i18n="form_title">Request a Quote</h3>
+          <p class="muted" data-i18n="form_sub">Fill below and we will contact you on WhatsApp or call.</p>
 
-         <form id="contactForm" onsubmit="sendData(event)">
+         <form id="contactForm">
 
             <div class="row">
               <div class="col">
-                <label for="name">Name*</label>
+                <label for="name" data-i18n="label_name">Name*</label>
                 <input id="name" name="name" type="text" required>
               </div>
               <div class="col">
-                <label for="business_name">Business name</label>
+                <label for="business_name" data-i18n="label_business">Business name</label>
                 <input id="business_name" name="business_name" type="text">
               </div>
             </div>
 
             <div class="row">
               <div class="col">
-                <label for="phone">Phone*</label>
+                <label for="phone" data-i18n="label_phone">Phone*</label>
                 <input id="phone" name="phone" type="tel" required placeholder="+91 98xxxx">
               </div>
               <div class="col">
-                <label for="city">City</label>
+                <label for="city" data-i18n="label_city">City</label>
                 <input id="city" name="city" type="text">
               </div>
             </div>
 
             <div class="col">
-              <label for="address">Delivery Address*</label>
+              <label for="address" data-i18n="label_address">Delivery Address*</label>
               <div class="address-modern">
                 <textarea id="address" name="address" required placeholder="Full delivery address with landmark (make it precise for faster delivery)"></textarea>
-                <div style="margin-top:8px;font-size:13px;color:var(--muted)">Tip: include district and nearest landmark.</div>
+                <div style="margin-top:8px;font-size:13px;color:var(--muted)" data-i18n="address_tip">Tip: include district and nearest landmark.</div>
               </div>
             </div>
 
             <div class="row">
               <div class="col">
-                <label for="variety">Variety</label>
+                <label for="variety" data-i18n="label_variety">Variety</label>
                 <select id="variety" name="variety">
                   <option value="Robusta">Robusta</option>
                   <option value="Yelakki">Yelakki</option>
@@ -243,22 +247,22 @@
                 </select>
               </div>
               <div class="col">
-                <label for="quantity_kg">Quantity (kg)</label>
+                <label for="quantity_kg" data-i18n="label_quantity">Quantity (kg)</label>
                 <input id="quantity_kg" name="quantity_kg" type="text" placeholder="e.g. 500">
               </div>
             </div>
 
             <div class="col">
-              <label for="message">Message</label>
+              <label for="message" data-i18n="label_message">Message</label>
               <textarea id="message" name="message" placeholder="Delivery date, packing, or other notes"></textarea>
             </div>
 
             <div style="margin:8px 0" class="muted">
-              <label><input type="checkbox" id="consent" name="consent" value="1"> I agree to be contacted about my inquiry.</label>
+              <label><input type="checkbox" id="consent" name="consent" value="1"> <span data-i18n="consent_text">I agree to be contacted about my inquiry.</span></label>
             </div>
 
             <div style="display:flex;gap:8px;align-items:center">
-              <button type="submit" class="btn">Send Inquiry</button>
+              <button type="submit" class="btn" id="sendInquiry">Send Inquiry</button>
               <button type="button" id="callBtn" class="btn secondary">Call / WhatsApp</button>
             </div>
 
@@ -274,8 +278,8 @@
 
     <!-- Why Choose Us -->
     <section style="margin-top:40px;text-align:center">
-      <h3>Why Choose SDB Plantation?</h3>
-      <p class="muted">Trusted by 100+ wholesalers and retailers across Karnataka for quality and reliability.</p>
+      <h3 data-i18n="why_title">Why Choose SDB Plantation?</h3>
+      <p class="muted" data-i18n="why_sub">Trusted by 100+ wholesalers and retailers across Karnataka for quality and reliability.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px">
         <div class="card"><div class="body"><strong>✅ Farm Direct</strong><br>Bananas sourced directly from our own farms.</div></div>
         <div class="card"><div class="body"><strong>🚚 Fast Delivery</strong><br>Next-day dispatch for most bulk orders.</div></div>
@@ -284,7 +288,7 @@
     </section>
 
     <!-- Gallery -->
-    <h3 id="gallery" style="margin-top:28px">Gallery</h3>
+    <h3 id="gallery" style="margin-top:28px" data-i18n="gallery_title">Gallery</h3>
     <div class="gallery"></div>
 
     <!-- Footer -->
@@ -322,7 +326,7 @@
 
     <!-- Floating WhatsApp -->
     <a class="whatsapp" id="waLink" href="#" target="_blank" rel="noopener">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="wa"><span>Chat</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="wa"><span id="waText">Chat</span>
     </a>
 
     <!-- Cart Button & Drawer -->
@@ -349,6 +353,62 @@
 
 
   <script>
+  document.addEventListener('DOMContentLoaded', ()=>{
+    // i18n translations (EN / KN)
+    const translations = {
+      kn: {
+        brand_name: 'ಎಸ್.ಡಿ.ಬಿ ಪ್ಲಾಂಟೇಶನ್',
+        brand_tag: 'ಕಥೆ: ಕಿಲ್ಲಾವರು - ಹೋಲ್ಸೇಲ್ ಬನಾನಾಸ್',
+        nav_products: 'ಉತ್ಪನ್ನಗಳು',
+        nav_gallery: 'ಗ್ಯಾಲರಿ',
+        nav_contact: 'ಸಂಪರ್ಕ',
+        hero_sub: 'ಫಾರ್ಮ್ → ಮಾರುಕಟ್ಟೆ · ತಾಜಾ ಪ್ರತಿದಿನ',
+        hero_h1: 'ತಾಜಾ ಬನಾನಾ — ವಿಶ್ವಾಸಾರ್ಹವಾಗಿ ವಿತರಣೆ',
+        hero_p: 'SDB ಪ್ಲಾಂಟೇಶನ್ ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಬನಾನಾ (ರೊಬುಸ್ಟಾ, ಯೆಲ್ಲಕ್ಕಿ, ರெட், ನರೇಂದ್ರ, ಕಾರ್ಪುರ) ಪೂರೈಸುತ್ತದೆ.',
+        prod_robusta: 'ರೊಬುಸ್ಟಾ',
+        prod_yelakki: 'ಯೆಲ್ಲಕ್ಕಿ',
+        prod_red: 'ರೆಡ್ ಬನಾನಾ',
+        prod_karpura: 'ಕಾರ್ಪುರ',
+        prod_narendra: 'ನರೇಂದ್ರ',
+        form_title: 'ಉಲ್ಲೇಖಕ್ಕಾಗಿ ವಿನಂತಿ',
+        form_sub: 'ಕೆಳಗಿನ ಫಾರ್ಮ್ ಭರ್ತಿ ಮಾಡಿ — ನಾವು ವಾಟ್ಸಪ್/ಕಾಲ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸೋಣ.',
+        label_name: 'ಹೆಸರು*',
+        label_business: 'ವ್ಯವಹಾರದ ಹೆಸರು',
+        label_phone: 'ತெರೆದ',
+        label_city: 'ನಗರ',
+        label_address: 'ವಿತರಣೆ ವಿಳಾಸ*',
+        address_tip: 'ಸೂಚನೆ: ತಾಲೂಕು ಮತ್ತು ಹತ್ತಿರದ ಲ್ಯಾಂಡ್‍ಮಾರ್ಕ್ ಸೇರಿಸಿ.',
+        label_variety: 'ಬಳಕೆ',
+        label_quantity: 'ಪ್ರಮಾಣ (ಕೆಜಿ)',
+        label_message: 'ಸಂದೇಶ',
+        consent_text: 'ನನ್ನ ವಿಚಾರಣೆ ಕುರಿತು ಸಂಪರ್ಕಿಸಲು ನಾನು ಒಪ್ಪುತ್ತೇನೆ.',
+        why_title: 'ಯಾಕೆ SDB ಪ್ಲಾಂಟೇಶನ್?',
+        why_sub: 'ಕರ್ಣಾಟಕಾದಲ್ಲಿ 100+ ವಹಿವಾಟುಕಾರರು ಮತ್ತು ರೀಟೈಲರ್‍ಗಳಿಗೆ ವಿಶ್ವಾಸಾರ್ಹ.' ,
+        gallery_title: 'ಗ್ಯಾಲರಿ',
+        wa_chat: 'ಚಾಟ್'
+      },
+      en: {}
+    };
+
+    function setLang(lang){
+      document.documentElement.lang = lang === 'kn' ? 'kn' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if(lang === 'kn' && translations.kn[key]) el.textContent = translations.kn[key];
+        else el.textContent = el.getAttribute('data-i18n-default') || el.textContent;
+      });
+      // change WA text
+      document.getElementById('waText').textContent = lang==='kn' ? translations.kn.wa_chat : 'Chat';
+    }
+
+    // store default text into data-i18n-default so switching back works
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      if(!el.getAttribute('data-i18n-default')) el.setAttribute('data-i18n-default', el.textContent.trim());
+    });
+
+    document.getElementById('btn-kn').addEventListener('click', ()=> setLang('kn'));
+    document.getElementById('btn-en').addEventListener('click', ()=> setLang('en'));
+
     // basic helpers
     const rupee = (n)=> '₹' + Number(n).toLocaleString('en-IN', {maximumFractionDigits:2});
 
@@ -376,7 +436,7 @@
       const cartFooter = document.getElementById('cartFooter');
       const cartEmptyMsg = document.getElementById('cartEmptyMsg');
       cartItems.innerHTML = '';
-      if(items.length===0){ cartEmptyMsg.style.display='block'; cartFooter.style.display='none'; cartCount.textContent = 0; return; }
+      if(items.length===0){ cartEmptyMsg.style.display='block'; cartFooter.style.display='none'; cartCount.textContent = 0; document.getElementById('cartTotal').textContent = rupee(0); return; }
       cartEmptyMsg.style.display='none'; cartFooter.style.display='block';
       let total = 0; items.forEach(it=>{
         const row = document.createElement('div'); row.className='cart-item';
@@ -405,8 +465,89 @@
       cartCount.textContent = items.reduce((s,i)=>s+i.qty,0);
     }
 
-    // wire add to cart buttons
-    document.querySelectorAll('.card').forEach(card=>{
+    // wire add to cart buttons using delegation
+    document.getElementById('products').addEventListener('click', (e)=>{
+      const btn = e.target.closest('.add-cart');
+      if(!btn) return;
+      const card = btn.closest('.card');
       const id = card.dataset.id;
       const name = card.dataset.name;
-      const pric
+      const price = card.dataset.price;
+      const img = card.querySelector('img')?.src || '';
+      const qtyEl = card.querySelector('.item-qty');
+      const qty = qtyEl ? Number(qtyEl.value) : 1;
+      addToCart(id,name,price, qty, img);
+    });
+
+    // cart drawer toggles
+    const openCartBtn = document.getElementById('openCart');
+    const cartDrawer = document.getElementById('cartDrawer');
+    document.getElementById('closeCart').addEventListener('click', ()=>cartDrawer.style.display='none');
+    openCartBtn.addEventListener('click', ()=> cartDrawer.style.display = cartDrawer.style.display==='flex' ? 'none':'flex');
+
+    // delegate quantity & remove inside cart
+    document.getElementById('cartItems').addEventListener('click', (e)=>{
+      if(e.target.dataset.remove){ removeFromCart(e.target.dataset.remove); return; }
+      if(e.target.dataset.action==='inc'){ const id = e.target.dataset.id; updateQty(id, cart[id].qty+1); return; }
+      if(e.target.dataset.action==='dec'){ const id = e.target.dataset.id; updateQty(id, cart[id].qty-1); return; }
+    });
+
+    document.getElementById('cartItems').addEventListener('input', (e)=>{
+      if(e.target.tagName==='INPUT' && e.target.type==='number'){
+        const id = e.target.dataset.id; updateQty(id, Number(e.target.value));
+      }
+    });
+
+    document.getElementById('clearCart').addEventListener('click', ()=>{ cart = {}; saveCart(); });
+
+    document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+      const phoneText = document.getElementById('phoneText').textContent || '+918553334247';
+      const phone = (phoneText.replace(/[^0-9]/g,'') || '918553334247');
+      const items = Object.values(cart);
+      if(items.length===0){ alert('Your cart is empty'); return; }
+      let msg = 'Order from SDB Plantation%0A';
+      items.forEach(i=> msg += `${i.name} - ${i.qty} kg - ${encodeURIComponent('₹')}${i.price*i.qty}%0A`);
+      msg += `%0ASubtotal: ${document.getElementById('cartTotal').textContent}`;
+      const wa = `https://wa.me/${phone}?text=${msg}`;
+      window.open(wa, '_blank');
+    });
+
+    // restore cart on load
+    renderCart();
+
+    // form handling
+    document.getElementById('contactForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      if(!name){ document.getElementById('formMessage').textContent='Please enter your name'; return; }
+      document.getElementById('formMessage').textContent='Thank you — we will contact you soon.';
+      e.target.reset();
+    });
+
+    // Call / WhatsApp button opens WA chat with phone and (optional) cart summary
+    document.getElementById('callBtn').addEventListener('click', ()=>{
+      const phoneText = document.getElementById('phoneText').textContent || '+918553334247';
+      const phone = phoneText.replace(/[^0-9]/g,'');
+      // include cart summary if exists
+      const items = Object.values(cart);
+      let msg = items.length? 'Order inquiry from website%0A':'';
+      items.forEach(i=> msg += `${i.name} - ${i.qty} kg - ${encodeURIComponent('₹')}${i.price*i.qty}%0A`);
+      const wa = `https://wa.me/${phone}?text=${msg}`;
+      window.open(wa, '_blank');
+    });
+
+    // set WA floating link
+    document.getElementById('waLink').href = 'https://wa.me/918553334247';
+
+    // year and scroll
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', ()=>{ topBtn.style.display = window.scrollY>300 ? 'block':'none' });
+    topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+    // ensure cart renders when storage changes (other tabs)
+    window.addEventListener('storage', ()=>{ cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}'); renderCart(); });
+  });
+  </script>
+</body>
+</html>
