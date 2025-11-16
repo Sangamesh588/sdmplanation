@@ -7,6 +7,32 @@
   <meta name="description" content="SDB Plantation — Farm fresh wholesale bananas. Contact for bulk orders, pricing and delivery." />
   <link rel="icon" href="/assets/favicon.ico" />
   <style>
+    .card.sdb-small-stack { grid-template-columns: 1fr !important; }
+.card.sdb-small-stack .controls { grid-column:1/-1; display:flex; justify-content:space-between; }
+
+    /* ===== Header / top-nav mobile fix ===== */
+header { gap:10px; padding:10px 12px; align-items:center; }
+.brand { display:flex; gap:10px; align-items:center; min-width:0; flex:0 1 auto; }
+.brand div { min-width:0; overflow:hidden; }
+.brand h1 { font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin:0; }
+.brand .small { display:block; font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* keep nav on one line, allow horizontal scroll if needed (no wrap) */
+.nav { display:flex; gap:8px; align-items:center; flex:0 0 auto; white-space:nowrap; overflow:auto; -webkit-overflow-scrolling:touch; padding-bottom:2px; }
+
+/* compact cart button so it doesn't take so much width */
+#openCart { padding:6px 10px !important; font-size:13px !important; min-width:56px; }
+
+/* hide repeated 'Cart' link text on very small screens to save space (keeps cart button) */
+@media (max-width:420px) {
+  .nav a[href="/cart.html"] { display:none; }
+  .nav a[href="#products"] { padding:4px 6px; font-size:13px; }
+  header { padding-left:10px; padding-right:10px; }
+}
+
+/* small visual guard: ensure header items never overlap */
+header, .nav, .brand { position:relative; z-index:15; }
+
     /* ===============================
    ⭐ MOBILE HEADER & CART FIX
    =============================== */
@@ -215,6 +241,97 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
     a.footer-link{color:var(--muted);text-decoration:none}
     .muted{color:var(--muted)}
     @media (max-width:900px){ .cards{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))} .brand img{width:54px;height:54px} .footer-grid{grid-template-columns:1fr} }
+    /* ==== Creative hover + entrance animation (paste at end of <style>) ==== */
+/* Palette tweaks */
+:root{
+  --accent-grad: linear-gradient(135deg,#f7d94c22, #2f9e44 25%, #7be49522 100%);
+  --card-glow: 0 12px 30px rgba(47,158,68,0.12);
+  --card-glow-hover: 0 20px 50px rgba(47,158,68,0.18);
+}
+
+/* Entrance animation */
+@keyframes sdb-fade-up {
+  from { opacity: 0; transform: translateY(18px) scale(.995); filter: blur(4px); }
+  60% { opacity: .9; transform: translateY(-6px) scale(1.01); filter: blur(0); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: none; }
+}
+
+.card.sdb-animate {
+  opacity: 0;
+  transform: translateY(18px) scale(.995);
+  will-change: transform, opacity, filter;
+}
+
+/* when animation class is applied the animation will play */
+.card.sdb-in {
+  animation: sdb-fade-up .45s cubic-bezier(.2,.9,.28,1) forwards;
+  box-shadow: var(--card-glow);
+}
+
+/* Stagger helper: JS will set inline animationDelay on each .card */
+
+/* Hover/pointer effects (desktop) */
+.card {
+  transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s ease, background .18s ease;
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle background accent strip top-right */
+.card::after{
+  content:'';
+  position:absolute; right:10px; top:10px; width:36px; height:36px; border-radius:8px;
+  background: rgba(255,255,255,0.06); pointer-events:none; mix-blend-mode:normal;
+  transition: transform .18s ease, opacity .18s ease;
+  transform: translateY(0);
+}
+
+/* pointer hover - desktop */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--card-glow-hover);
+    background: linear-gradient(180deg, rgba(244,255,244,0.6), rgba(255,255,255,0));
+  }
+  .card:hover::after {
+    transform: translateY(-4px) scale(1.06);
+    opacity: 0.95;
+  }
+  .card img {
+    transform-origin: center;
+    transition: transform .25s cubic-bezier(.2,.9,.28,1);
+  }
+  .card:hover img {
+    transform: scale(1.03) translateY(-4px);
+  }
+}
+
+/* active / tap state for touch */
+.card:active, .card.sdb-tap {
+  transform: scale(.98) translateY(2px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+/* Add a subtle label with price when hovered (desktop) */
+.card .price {
+  position: relative;
+  z-index: 4;
+  transition: transform .12s ease, color .12s ease;
+}
+
+/* Micro animation for add button */
+.add-btn {
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+.add-btn:active { transform: scale(.94); opacity:.95; }
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .card.sdb-in, .card { animation: none !important; transition: none !important; transform: none !important; }
+}
+
   </style>
 </head>
 <body>
@@ -244,7 +361,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
 
     <!-- Hero -->
     <section>
-      <div class="small">Farm → Market · Fresh daily-->home</div>
+      <div class="small">Farm → Market · Fresh daily</div>
       <h2 style="margin:6px 0">Fresh wholesale bananas — delivered reliably</h2>
       <p class="small">Minimum order 200 kg. Add items to cart, then review and place order on the cart page.</p>
 
@@ -312,7 +429,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
           </div>
         </div>
 
-        <div class="card" data-sku="RobustaBulk" data-name="Robusta (Bulk)" data-price="26">
+        <!-- <div class="card" data-sku="RobustaBulk" data-name="Robusta (Bulk)" data-price="26">
           <img src="robust.jpeg" alt="Robusta bulk">
           <div class="body">
             <h3>Robusta (Bulk)</h3>
@@ -323,7 +440,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
               <div class="small">In cart: <span class="in-cart">0</span> kg</div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="card" data-sku="Red" data-name="Red banana" data-price="55">
           <img src="red bananas.webp" alt="Red bananas">
@@ -533,8 +650,82 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
     console.error('[INLINE-FIX] unexpected error', err);
   }
 })();
+/* SDB: staggered entrance + touch tap class */
+(function(){
+  try {
+    const cards = Array.from(document.querySelectorAll('.card'));
+    if (!cards.length) return;
+
+    // Only animate once
+    if (!window.__sdbEntranceDone) {
+      // add initial class
+      cards.forEach((c, i) => {
+        c.classList.add('sdb-animate');
+        // stagger delay (smaller screens = slightly faster)
+        const base = (window.innerWidth < 640) ? 70 : 90;
+        c.style.animationDelay = (i * base) + 'ms';
+        // add final trigger after small timeout so CSS picks up animationDelay
+        setTimeout(()=> c.classList.add('sdb-in'), 40);
+      });
+      window.__sdbEntranceDone = true;
+    } else {
+      // if already done, ensure they are visible
+      cards.forEach(c => c.classList.add('sdb-in'));
+    }
+
+    // Touch friendly: add quick tap class on touchstart to mirror :active
+    let lastTouch = 0;
+    cards.forEach(c => {
+      c.addEventListener('touchstart', (e) => {
+        lastTouch = Date.now();
+        c.classList.add('sdb-tap');
+      }, {passive:true});
+      c.addEventListener('touchend', (e) => {
+        setTimeout(()=> c.classList.remove('sdb-tap'), 120);
+      });
+      // remove keyboard focus outline gracefully
+      c.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter' || e.key === ' ') {
+          c.classList.add('sdb-tap');
+          setTimeout(()=> c.classList.remove('sdb-tap'), 160);
+        }
+      });
+    });
+
+    // Make whole card clickable to add to cart (non-invasive)
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest && e.target.closest('.card');
+      if (!card) return;
+      // ignore clicks on Remove / qty / buttons / links inside card
+      if (e.target.closest('button') || e.target.closest('input') || e.target.closest('a')) return;
+      // find add-btn inside and trigger it
+      const addBtn = card.querySelector('.add-btn');
+      if (addBtn) {
+        // simulate click for existing handler
+        addBtn.click();
+        // tiny pulse
+        addBtn.animate([{ transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 200 });
+      }
+    }, true);
+
+  } catch (err) {
+    console.error('sdb-entrance error', err);
+  }
+})();
+// ensure cart layout reactive: switch a class on small width for extra safety
+(function(){ 
+  function layoutGuard(){
+    document.querySelectorAll('.card').forEach(c=>{
+      if (window.innerWidth <= 420) c.classList.add('sdb-small-stack'); else c.classList.remove('sdb-small-stack');
+    });
+  }
+  window.addEventListener('resize', layoutGuard);
+  window.addEventListener('orientationchange', layoutGuard);
+  document.addEventListener('DOMContentLoaded', layoutGuard);
+})();
+
 </script>
 <!-- ---- END INLINE FIX ---- -->
 
- 
+ </body>
 </html>
