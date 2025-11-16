@@ -37,9 +37,14 @@ async function sendData(event) {
 
     const json = await res.json();
     if (json.success) {
-      formMessage.textContent = "✅ Thank you! Inquiry sent successfully.";
-      document.getElementById("contactForm").reset();
-    } else {
+  formMessage.style.fontSize = "20px";
+  formMessage.style.fontWeight = "bold";
+  formMessage.style.color = "green";
+
+  formMessage.textContent = "✅ Thank you! Inquiry sent successfully.";
+  document.getElementById("contactForm").reset();
+}
+ else {
       formMessage.textContent = "❌ Server error: " + (json.message || "Try again later.");
     }
   } catch (error) {
