@@ -5,6 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cart — SDB Plantation</title>
 <style>
+    /* ===== Cart card layout (desktop & mobile) ===== */
+.cart-card, /* for safety if you used another class */ .card {
+  display:grid;
+  grid-template-columns: 86px 1fr 90px; /* img | details | price/actions */
+  gap:12px;
+  align-items:center;
+  padding:10px;
+  box-sizing:border-box;
+}
+
+/* image */
+.card img { width:86px; height:86px; object-fit:cover; border-radius:8px; }
+
+/* center details and prevent overflow */
+.card .body, .card .meta {
+  min-width:0; /* allow truncation inside flex/grid */
+}
+
+/* product title: don't wrap into controls */
+.card h3, .card .title, .card strong {
+  margin:0;
+  font-size:15px;
+  line-height:1.2;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* controls on the right column */
+.card .controls, .card > div[style*="min-width:120px"] {
+  text-align:right;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  align-items:flex-end;
+}
+
+/* make remove button clear and space below */
+.card .remove {
+  display:inline-block;
+  padding:6px 8px;
+  border-radius:8px;
+  border:1px solid #e6e9ed;
+  background:transparent;
+  color:var(--muted);
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+/* small screen: stack layout so remove & price are below details and not squeezed */
+@media (max-width:720px) {
+  .card {
+    grid-template-columns: 96px 1fr; /* image | details */
+    align-items:start;
+  }
+  .card .controls {
+    grid-column: 1 / -1; /* controls stretch full width under details */
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:8px;
+  }
+  .card img { width:100%; height:140px; border-radius:10px; }
+  .card h3 { white-space:normal; } /* allow title to wrap nicely under image */
+}
+
     /* ===============================
    ⭐ MOBILE HEADER & CART FIX
    =============================== */
