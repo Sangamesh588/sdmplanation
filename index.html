@@ -363,7 +363,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
     <section>
       <div class="small">Farm → Market · Fresh daily</div>
       <h2 style="margin:6px 0">Fresh wholesale bananas — delivered reliably</h2>
-      <p class="small">Minimum order 200 kg. Add items to cart, then review and place order on the cart page.</p>
+      <p class="small">Minimum order 100 kg. Add items to cart, then review and place order on the cart page.</p>
 
       <!-- Key info (fast delivery etc.) -->
       <div class="info-grid" aria-hidden="false">
@@ -393,7 +393,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
       <div style="margin-top:18px;padding:12px;border-radius:10px;border:1px dashed #e6f4ea">
         <strong>How ordering works</strong>
         <ol class="small">
-          <li>Add a variety to cart (default 200 kg). Quantities can be changed on the cart page.</li>
+          <li>Add a variety to cart (default 100 kg). Quantities can be changed on the cart page.</li>
           <li>Enter your Name, Phone & Delivery Address on the cart page.</li>
           <li>Click Checkout to save the order and open WhatsApp confirmation.</li>
         </ol>
@@ -403,12 +403,12 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
       <h3 id="products" style="margin-top:20px">Products</h3>
       <div id="productsGrid" class="cards">
         <!-- Product cards (images & prices unchanged) -->
-        <div class="card" data-sku="Robusta" data-name="Robusta" data-price="28">
+        <div class="card" data-sku="Robusta" data-name="Robusta" data-price="25">
           <img src="robust.jpeg" alt="Robusta bananas">
           <div class="body">
             <h3>Robusta</h3>
             <p class="small">Reliable, widely used — good shelf life.</p>
-            <div class="price">₹28 / kg</div>
+            <div class="price">₹25 / kg</div>
             <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
               <button class="btn add-btn">Add to cart</button>
               <div class="small">In cart: <span class="in-cart">0</span> kg</div>
@@ -416,12 +416,12 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
           </div>
         </div>
 
-        <div class="card" data-sku="Yelakki" data-name="Yelakki" data-price="45">
+        <div class="card" data-sku="Yelakki" data-name="Yelakki" data-price="50">
           <img src="organik-yellaki-banana-500x500.webp" alt="Yelakki bananas">
           <div class="body">
             <h3>Yelakki</h3>
             <p class="small">Sweet and preferred for retail.</p>
-            <div class="price">₹45 / kg</div>
+            <div class="price">₹50 / kg</div>
             <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
               <button class="btn add-btn">Add to cart</button>
               <div class="small">In cart: <span class="in-cart">0</span> kg</div>
@@ -429,25 +429,25 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
           </div>
         </div>
 
-        <!-- <div class="card" data-sku="RobustaBulk" data-name="Robusta (Bulk)" data-price="26">
-          <img src="robust.jpeg" alt="Robusta bulk">
+        <div class="card" data-sku="RobustaBulk" data-name="Robusta (Bulk)" data-price="50">
+          <img src="green.banana.jpg" alt="green banana">
           <div class="body">
             <h3>Robusta (Bulk)</h3>
             <p class="small">Bulk grade for processors & wholesalers.</p>
-            <div class="price">₹26 / kg</div>
+            <div class="price">₹50 / kg</div>
             <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
               <button class="btn add-btn">Add to cart</button>
               <div class="small">In cart: <span class="in-cart">0</span> kg</div>
             </div>
           </div>
-        </div> -->
+        </div>
 
-        <div class="card" data-sku="Red" data-name="Red banana" data-price="55">
+        <div class="card" data-sku="Red" data-name="Red banana" data-price="50">
           <img src="red bananas.webp" alt="Red bananas">
           <div class="body">
             <h3>Red banana</h3>
             <p class="small">Premium variety with great taste & color.</p>
-            <div class="price">₹55 / kg</div>
+            <div class="price">₹50 / kg</div>
             <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
               <button class="btn add-btn">Add to cart</button>
               <div class="small">In cart: <span class="in-cart">0</span> kg</div>
@@ -455,12 +455,12 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
           </div>
         </div>
 
-        <div class="card" data-sku="Karpura" data-name="Karpura" data-price="39">
+        <div class="card" data-sku="Karpura" data-name="Karpura" data-price="50">
           <img src="karpura.jpeg" alt="Karpura bananas">
           <div class="body">
             <h3>Karpura</h3>
             <p class="small">Fragrant variety, specialty grade.</p>
-            <div class="price">₹39 / kg</div>
+            <div class="price">₹50 / kg</div>
             <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
               <button class="btn add-btn">Add to cart</button>
               <div class="small">In cart: <span class="in-cart">0</span> kg</div>
@@ -551,7 +551,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
     console.log('[INLINE-FIX] binding add buttons');
 
     const KEY = 'sdb_cart_v3';
-    const DEFAULT_KG = 200;
+    const DEFAULT_KG = 100;
 
     function safeParse(v){ try { return JSON.parse(v || '{}'); } catch(e){ console.error('[INLINE-FIX] parse', e); return {}; } }
     function loadCart(){ return safeParse(localStorage.getItem(KEY)); }
@@ -723,6 +723,15 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
   window.addEventListener('orientationchange', layoutGuard);
   document.addEventListener('DOMContentLoaded', layoutGuard);
 })();
+// after updateTotals() in render():
+// force a tiny reflow to ensure CSS sizes recalc on mobile
+requestAnimationFrame(()=> {
+  document.querySelectorAll('.card .lineTotal').forEach(el => {
+    el.style.display = 'inline-block';
+    // remove temporary inline style after a tick
+    setTimeout(()=> el.style.display = '', 60);
+  });
+});
 
 </script>
 <!-- ---- END INLINE FIX ---- -->
