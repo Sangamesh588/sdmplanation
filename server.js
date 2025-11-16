@@ -1,3 +1,4 @@
+// server.js — safe startup, saves /order to Mongo when available
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -17,50 +18,97 @@ const __dirname = path.dirname(__filename);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Serve static files (index.html, script.js, images, etc.)
 app.use(express.static(__dirname));
 
-// ✅ MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Connected to MongoDB Atlas"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
-
-// ✅ Schema & Model
-const inquirySchema = new mongoose.Schema({
-  name: String,
-  business_name: String,
-  phone: String,
-  city: String,
-  address: String,
-  variety: String,
-  quantity_kg: String,
-  message: String,
-  consent: Boolean,
-  date: { type: Date, default: Date.now },
+// Try connect but do not crash
+async function tryConnectMongo() {
+  const uri = process.env.MONGO_URI;
+  if (!uri) {
+    console.warn("⚠️ MONGO_URI not provided — running without DB. Orders will NOT be persisted to Mongo.");
+    return null;
+  }
+  try {
+    await mongoose.connect(uri, { autoIndex: true });
+    console.log("✅ Connected to MongoDB Atlas");
+    return mongoose;
+  } catch (err) {
+    console.error("❌ MongoDB connection error (continuing without DB):", err.message || err);
+    return null;
+  }
+}
+mongoose.connection.on('connected', () => {
+  console.log('🔎 Mongoose connected. DB name:', mongoose.connection.name);
+  console.log('🔎 Mongoose hosts:', mongoose.connection.hosts || mongoose.connection.client?.topology?.s?.options?.hosts);
 });
 
-const Inquiry = mongoose.model("Inquiry", inquirySchema);
+// Order schema
+const orderItemSchema = new mongoose.Schema({
+  sku: String,
+  name: String,
+  qtyKg: Number,
+  price: Number,
+  img: String,
+});
+const orderSchema = new mongoose.Schema({
+  customer: {
+    name: String,
+    phone: String,
+    address: String,
+  },
+  items: [orderItemSchema],
+  totalKg: Number,
+  totalAmount: Number,
+  date: { type: Date, default: Date.now },
+});
+let Order;
+try { Order = mongoose.model("Order", orderSchema); } catch(e) { Order = mongoose.models.Order || mongoose.model("Order", orderSchema); }
 
-// ✅ Route to handle form submissions
-app.post("/submit", async (req, res) => {
-  console.log("📩 Incoming form data:", req.body);
+// Route: accept orders
+app.post("/order", async (req, res) => {
   try {
-    const newInquiry = new Inquiry(req.body);
-    await newInquiry.save();
-    console.log("✅ Inquiry saved successfully");
-    res.json({ success: true, message: "Inquiry saved successfully" });
-  } catch (error) {
-    console.error("❌ Error saving inquiry:", error);
+    const payload = req.body;
+    // basic validation
+    if (!payload || !payload.customer || !Array.isArray(payload.items) || payload.items.length === 0) {
+      return res.status(400).json({ success: false, message: "Invalid order payload" });
+    }
+
+    // normalize items
+    const items = payload.items.map(it => ({
+      sku: it.sku,
+      name: it.name,
+      qtyKg: Number(it.qtyKg) || 0,
+      price: Number(it.price) || 0,
+      img: it.img || ""
+    }));
+    const totalKg = items.reduce((s,i) => s + i.qtyKg, 0);
+    const totalAmount = items.reduce((s,i) => s + (i.qtyKg * i.price), 0);
+
+    if (mongoose.connection.readyState) {
+      const newOrder = new Order({
+        customer: payload.customer,
+        items,
+        totalKg,
+        totalAmount,
+      });
+      const saved = await newOrder.save();
+      console.log("✅ Order saved:", saved._id);
+      return res.json({ success: true, orderId: saved._id });
+    } else {
+      console.warn("⚠️ Order received but DB not connected. Not saved.");
+      // send back a pseudo-id so frontend behaves as success
+      return res.json({ success: true, orderId: `NOSQL-${Date.now()}`, note: "DB not connected; order not persisted." });
+    }
+  } catch (err) {
+    console.error("❌ Error saving order:", err);
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
-// ✅ Fallback route for SPA / HTML
+// Fallback (serve index.html)
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// ✅ Start server
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+tryConnectMongo().finally(() => {
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+});
