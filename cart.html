@@ -5,6 +5,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cart — SDB Plantation</title>
 <style>
+    /* === MOBILE-FIRST UI IMPROVEMENTS (paste at top of existing <style>) === */
+:root{
+  --brand:#2f9e44;
+  --fg:#0f1724;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --card-shadow: 0 10px 30px rgba(15,23,36,0.06);
+  --radius:12px;
+  --tap:12px;        /* button vertical padding */
+  --gap:12px;
+  --max-width:1100px;
+  --text-base:16px;
+  --small:13px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* reset / mobile-friendly defaults */
+html,body{height:100%;margin:0;padding:0;background:#fff;color:var(--fg);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+.wrap{max-width:var(--max-width);margin:0 auto;padding:14px}
+
+/* buttons & tappables */
+.btn, button, .cart-fab, a.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px; padding:calc(var(--tap) + 2px) 14px; border-radius:var(--radius);
+  font-size:var(--text-base); line-height:1; min-height:44px; cursor:pointer;
+  -webkit-tap-highlight-color: rgba(0,0,0,0.08);
+}
+.btn { background:var(--brand); color:#fff; border:none; box-shadow:0 6px 18px rgba(47,158,68,0.12) }
+.btn.secondary{ background:transparent; color:var(--brand); border:1px solid rgba(47,158,68,0.12) }
+
+/* cards */
+.card{background:var(--card); border-radius:var(--radius); box-shadow:var(--card-shadow); overflow:hidden; border:1px solid rgba(0,0,0,0.04)}
+.card img{width:100%;height:auto;display:block;object-fit:cover}
+
+/* grids (mobile-first) */
+.cards{display:grid;grid-template-columns:1fr;gap:var(--gap);margin-top:14px}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.kpi{flex:1;min-width:120px;padding:10px;border-radius:10px;background:#f6f9f5;text-align:center}
+
+/* typography */
+h1,h2,h3{margin:6px 0 8px;font-weight:700}
+p, .small{font-size:var(--small);color:var(--muted);margin:0}
+
+/* header */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0}
+.brand img{width:52px;height:52px;border-radius:10px;object-fit:cover}
+.brand h1{font-size:18px;margin:0}
+
+/* layout adjustments on small screens */
+@media (min-width:640px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .hero{grid-template-columns:1fr 360px;gap:20px}
+}
+@media (min-width:1000px){
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .wrap{padding:22px}
+}
+
+/* cart fab styling (mobile friendly) */
+.cart-fab{position:fixed;right:14px;bottom:14px;z-index:200;padding:12px 14px;border-radius:999px;box-shadow:0 12px 36px rgba(0,0,0,0.16)}
+
+/* inputs */
+.input, input[type="text"], input[type="tel"], textarea, .qty {
+  width:100%; padding:10px; border-radius:10px; border:1px solid #e6e9ed; font-size:var(--text-base);
+  box-sizing:border-box;
+}
+
+/* Make sure long text wraps and no horizontal scroll */
+*{word-break:break-word}
+
+/* small tweaks for cart page totals/buttons */
+.totals{margin-top:12px;padding-top:12px;border-top:1px dashed #eee}
+
   body{font-family:Inter,system-ui; margin:0;background:#fff;color:#0f1724}
   .wrap{max-width:980px;margin:20px auto;padding:0 16px}
   header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -21,6 +94,12 @@
 </style>
 </head>
 <body>
+    <!-- Mobile / PWA friendly meta (paste into <head>) -->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#2f9e44">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <div class="wrap">
     <header>
       <h2>Your Cart</h2>
@@ -62,7 +141,19 @@
       <div class="small">SDB Plantation · Near Basavanahalli Road, Chikkamagaluru · <a href="https://wa.me/918553334247">WhatsApp</a> · <a href="mailto:sdmplantation@gmail.com">sdmplantation@gmail.com</a></div>
     </footer>
   </div>
-
+<script>
+/* Small mobile UX: ensure elements are scrolled into view when input focused */
+(function(){
+  document.addEventListener('focusin', (e) => {
+    const el = e.target;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
+      setTimeout(()=> {
+        try { el.scrollIntoView({behavior:'smooth', block:'center'}); } catch(e){}
+      }, 300);
+    }
+  });
+})();
+</script>
   <script src="/cart.js"></script>
 </body>
 </html>
