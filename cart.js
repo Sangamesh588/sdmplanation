@@ -34,22 +34,24 @@
       const div = document.createElement('div');
       div.className = 'card';
     div.className = "cart-item";
-div.innerHTML = `
-  <img src="${escapeHtml(it.img)}" alt="${escapeHtml(it.name)}" class="item-img">
+<div class="item-info">
+  <h3 class="item-title">${escapeHtml(it.name)}</h3>
 
-  <div class="item-info">
-    <h3 class="item-title">${escapeHtml(it.name)}</h3>
-    <div class="item-price">₹${Number(it.price).toFixed(2)} / kg</div>
+  <div class="item-price">₹${Number(it.price).toFixed(2)} / kg</div>
 
-    <div class="qty-row">
-      <button class="qty-btn qty-minus" data-sku="${escapeHtml(it.sku)}">−</button>
-      <input class="qty-input" type="number" min="1" step="1" value="${it.qtyKg}" data-sku="${escapeHtml(it.sku)}">
-      <button class="qty-btn qty-plus" data-sku="${escapeHtml(it.sku)}">+</button>
-    </div>
-
-    <div class="line-total">₹${(it.qtyKg * it.price).toFixed(2)}</div>
+  <div class="qty-row" style="margin-top:8px;">
+    Quantity: <strong>${it.qtyKg}</strong> kg
+    <span style="color:#2f9e44; font-weight:700; margin-left:6px;">
+      (${(it.qtyKg / 20).toFixed(2)} carat${(it.qtyKg / 20) == 1 ? "" : "s"})
+    </span>
   </div>
+
+  <div class="line-total" style="margin-top:10px;">
+    ₹${(it.qtyKg * it.price).toFixed(2)}
+  </div>
+</div>
 `;
+
       function caratsFromKg(kg) {
   if (!kg || kg <= 0) return "";
   const c = kg / 20;
@@ -244,5 +246,6 @@ list.addEventListener("input", (e) => {
   });
 
 })();
+
 
 
