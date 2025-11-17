@@ -50,6 +50,13 @@ div.innerHTML = `
     <div class="line-total">₹${(it.qtyKg * it.price).toFixed(2)}</div>
   </div>
 `;
+      function caratsFromKg(kg) {
+  if (!kg || kg <= 0) return "";
+  const c = kg / 20;
+  // format: 1 carat, 1.5 carats, 2 carats
+  return `(${c % 1 === 0 ? c + " carat" : c.toFixed(2) + " carats"})`;
+}
+
 
       list.appendChild(div);
     });
@@ -237,4 +244,5 @@ list.addEventListener("input", (e) => {
   });
 
 })();
+
 
