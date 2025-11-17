@@ -253,20 +253,43 @@ function render() {
   }
 
   // Hook up event listeners
-  function bindHandlers(){
-    const list = document.getElementById('cartList');
-    if (!list) return;
+function bindHandlers() {
 
-    // Delegated click handling for Remove and future buttons
-    list.addEventListener('click', (e) => {
-      const rem = e.target.closest && e.target.closest('.remove-btn');
-      if (rem) {
-        const sku = rem.dataset.sku;
-        if (!sku) return;
-        if (!confirm('Remove this item from cart?')) return;
-        handleRemove(sku);
-      }
+    const list = document.getElementById('cartList');
+
+    // REMOVE ITEM
+    list.addEventListener("click", (e) => {
+        const rem = e.target.closest(".remove");
+        if (rem) {
+            const sku = rem.dataset.sku;
+            const cart = loadCart();
+            delete cart[sku];
+            saveCart(cart);
+            render();
+        }
     });
+
+    // ⭐⭐ MANUAL QUANTITY INPUT ⭐⭐
+    list.addEventListener("input", (e) => {
+        if (e.target.classList.contains("qty-input")) {
+            const sku = e.target.dataset.sku;
+            let v = Number(e.target.value);
+
+            if (!v || v < 1) v = 1;
+
+            const cart = loadCart();
+            cart[sku].qtyKg = v;
+            saveCart(cart);
+
+            render(); // updates carat + total
+        }
+    });
+    // ⭐⭐ END ⭐⭐
+
+
+    // (your other buttons: clear cart, checkout, whatsapp…)
+}
+
 
     // Clear cart
     const clearBtn = document.getElementById('clearBtn');
@@ -313,4 +336,5 @@ function render() {
     loadCart, saveCart, render, clearCart
   };
 })();
+
 
