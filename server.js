@@ -40,6 +40,10 @@ mongoose.connection.on('connected', () => {
   console.log('🔎 Mongoose connected. DB name:', mongoose.connection.name);
   console.log('🔎 Mongoose hosts:', mongoose.connection.hosts || mongoose.connection.client?.topology?.s?.options?.hosts);
 });
+function caratsFromKg(kg) {
+  kg = Number(kg) || 0;
+  return kg / 20;   // 1 carat = 20 kg
+}
 
 // Simple order item schema (no _id per item)
 const orderItemSchema = new mongoose.Schema({
@@ -79,28 +83,38 @@ app.post('/order', async (req, res) => {
     }
 
     // Normalize items: ensure numeric types
-    const items = body.items.map(it => ({
-      sku: String(it.sku || '').trim(),
-      name: String(it.name || '').trim(),
-      qtyKg: Number(it.qtyKg || 0),
-      price: Number(it.price || 0),
-      img: String(it.img || '')
-    }));
+const items = body.items.map(it => {
+  const qtyKg = Number(it.qtyKg || 0);
+  const price = Number(it.price || 0);
+  return {
+    sku: String(it.sku || '').trim(),
+    name: String(it.name || '').trim(),
+    qtyKg,
+    price,
+    img: String(it.img || ''),
+    carats: caratsFromKg(qtyKg)  // ⭐ add carats per item
+  };
+});
+
 
     // compute totals (trust server-side calculation)
     const totalKg = items.reduce((s,i) => s + (Number(i.qtyKg) || 0), 0);
     const totalAmount = items.reduce((s,i) => s + ((Number(i.qtyKg) || 0) * (Number(i.price) || 0)), 0);
 
-    const orderDoc = {
-      customer: {
-        name: String(body.customer.name || '').trim(),
-        phone: String(body.customer.phone || '').trim(),
-        address: String(body.customer.address || '').trim()
-      },
-      items,
-      totalKg,
-      totalAmount
-    };
+  const totalCarats = items.reduce((s, i) => s + (i.carats || 0), 0);
+
+const orderDoc = {
+  customer: {
+    name: String(body.customer.name || '').trim(),
+    phone: String(body.customer.phone || '').trim(),
+    address: String(body.customer.address || '').trim()
+  },
+  items,
+  totalKg,
+  totalAmount,
+  totalCarats  // ⭐ save total carats for entire order
+};
+
 
     // Save if DB connected; otherwise acknowledge but don't error
     if (mongoose.connection.readyState) {
@@ -125,3 +139,4 @@ app.get(/.*/, (req, res) => {
 tryConnectMongo().finally(() => {
   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 });
+
