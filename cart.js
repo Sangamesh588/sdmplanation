@@ -209,17 +209,27 @@
     });
 
     // manual qty input (delegated)
-    list.addEventListener('input', (e) => {
-      if (e.target && e.target.classList && e.target.classList.contains('qty-input')) {
-        const sku = e.target.dataset.sku;
-        let v = Number(e.target.value);
-        if (!v || v < 1) v = 1;
-        const cart = loadCart();
-        if (!cart[sku]) return;
-        cart[sku].qtyKg = v;
-        saveCart(cart); // render() will be called by saveCart
-      }
-    });
+list.addEventListener('input', (e) => {
+  if (e.target.classList.contains('qty-input')) {
+
+    let value = e.target.value.replace(/[^\d]/g, "");
+    if (value === "") value = "1";
+
+    e.target.value = value;
+
+    const sku = e.target.dataset.sku;
+    const cart = loadCart();
+    if (!cart[sku]) return;
+
+    // update quantity without triggering full render
+    cart[sku].qtyKg = Number(value);
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+    // ONLY update totals (no render)
+    updateTotals(Object.values(cart));
+  }
+});
+
 
     // Clear cart
     const clearBtn = document.getElementById('clearBtn');
@@ -264,3 +274,4 @@
   // debug helpers
   window.__cartDebug = { loadCart, saveCart, render, clearCart };
 })();
+
