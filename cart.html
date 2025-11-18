@@ -846,22 +846,110 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
     </footer>
   </div>
 <script>
+/* Small mobile UX: ensure elements are scrolled into view when input focused */
+(function(){
+  document.addEventListener('focusin', (e) => {
+    const el = e.target;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
+      setTimeout(()=> {
+        try { el.scrollIntoView({behavior:'smooth', block:'center'}); } catch(e){}
+      }, 300);
+    }
+  });
+})();
 
-/* ===========================
-   SCROLL FIX FOR MOBILE
-=========================== */
-document.addEventListener("focusin", (e) => {
-  const el = e.target;
-  if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
-    setTimeout(() => {
-      try { el.scrollIntoView({ behavior:"smooth", block:"center" }); } catch(e){}
-    }, 300);
+(function(){
+  const cartContainerSelector = '#cartContainer';
+  const cartItemSelector = '.cart-item';
+  const qtyInputSelector = 'input[type="number"], .item-qty';
+  const clearBtnSelector = '#clearCartBtn, .clear-cart';
+
+  const $ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+  const removeEl = (el) => el && el.remove && el.remove();
+
+  function removePlusMinusButtons() {
+    $('.qty-plus, .qty-minus, .quantity-btn, .qty-controls, .quantity-buttons').forEach(removeEl);
+    const possible = $('button, .btn, .quantity-action, .qty-action, a');
+    possible.forEach(el => {
+      if ((el.textContent || '').trim() === '+' || (el.textContent || '').trim() === '-') {
+        removeEl(el);
+      }
+    });
+
+    $(qtyInputSelector).forEach(input => {
+      const parent = input.parentElement;
+      if (!parent) return;
+      Array.from(parent.children).forEach(child => {
+        if (child !== input && ((child.textContent || '').trim() === '+' || (child.textContent || '').trim() === '-')) {
+          removeEl(child);
+        }
+      });
+    });
+  }
+
+  function normalizeQtyInputs() {
+    $(qtyInputSelector).forEach(input => {
+      try {
+        if (input.tagName.toLowerCase() === 'input') {
+          if (!input.hasAttribute('min')) input.setAttribute('min','0');
+        }
+      } catch(e) {}
+    });
+  }
+
+  /* ⭐ FIXED CLEAR CART with Confirm() */
+  function attachClearCart() {
+    const clearButtons = $(clearBtnSelector);
+    clearButtons.forEach(btn => {
+      if (btn.tagName.toLowerCase() === 'button') btn.type = 'button';
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const ask = confirm("Are you sure you want to clear your cart?");
+        if (!ask) return; // ❌ Cancel → do nothing
+
+        const container = document.querySelector(cartContainerSelector) || document.body;
+        const items = container.querySelectorAll(cartItemSelector);
+        items.forEach(it => it.remove());
+
+        updateTotals();
+      });
+    });
+  }
+
+  function init() {
+    removePlusMinusButtons();
+    normalizeQtyInputs();
+    attachClearCart();
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+  init();
+
+  const container = document.querySelector(cartContainerSelector) || document.body;
+  const obs = new MutationObserver(() => {
+    removePlusMinusButtons();
+    normalizeQtyInputs();
+    attachClearCart();
+  });
+  obs.observe(container, { childList: true, subtree: true });
+})();
+
+
+
+/* ⭐⭐⭐ ADDED BY CHATGPT — YOUR REQUESTED FEATURES ⭐⭐⭐ */
+
+/* 1️⃣ SIMPLE QUANTITY INPUT (LIKE PHONE INPUT) */
+document.addEventListener("input", (e) => {
+  if (e.target.classList.contains("qty-input")) {
+    e.target.value = e.target.value.replace(/[^\d]/g, "");  // only digits
+    if (e.target.value === "") e.target.value = "0";
+    updateTotals();
   }
 });
 
-/* ===========================
-   UPDATE TOTALS + DISCOUNT
-=========================== */
+/* 2️⃣ CALCULATE TOTALS + 5% DISCOUNT */
 function updateTotals() {
   let totalItems = 0;
   let totalKg = 0;
@@ -877,15 +965,14 @@ function updateTotals() {
     grandTotal += qty * price;
   });
 
-  // ⭐ DISCOUNT FUNCTION (5% if > 60 kg)
-  const discountMessage = document.getElementById("discountMessage");
+  const discountMsg = document.getElementById("discountMessage");
 
   if (totalKg > 60) {
     let discount = grandTotal * 0.05;
     grandTotal -= discount;
-    discountMessage.textContent = "🎉 Congratulations! You received 5% discount!";
+    discountMsg.textContent = "🎉 WOW! You got 5% discount for ordering more than 60 KG!";
   } else {
-    discountMessage.textContent = "";
+    discountMsg.textContent = "";
   }
 
   document.getElementById("totalItems").textContent = totalItems;
@@ -893,61 +980,12 @@ function updateTotals() {
   document.getElementById("grandTotal").textContent = grandTotal.toFixed(2);
 }
 
-/* ===========================
-   FIX INPUT TYPING ISSUE
-=========================== */
-document.addEventListener("input", (e) => {
-  if (e.target.classList.contains("qty-input")) {
-    e.target.value = e.target.value.replace(/[^\d]/g, "");
-    if (e.target.value === "") e.target.value = "0";
-    updateTotals();
-  }
-});
-
-/* ===========================
-   REMOVE CARAT OPTION EXCEPT 2 ITEMS
-=========================== */
-function removeCaratOptions() {
-  document.querySelectorAll(".carat-select").forEach(select => {
-    const sku = (select.dataset.sku || "").trim().toLowerCase();
-    const allowed = ["robusta", "robusta green banana"];
-
-    if (!allowed.includes(sku)) {
-      select.remove();
-    }
-  });
-}
-
-/* ===========================
-   REMOVE + / - BUTTONS
-=========================== */
-function removePlusMinusButtons() {
-  document.querySelectorAll(".qty-plus, .qty-minus").forEach(btn => btn.remove());
-}
-
-/* ===========================
-   CLEAR CART BTN
-=========================== */
-document.getElementById("clearBtn").addEventListener("click", () => {
-  const list = document.getElementById("cartList");
-  list.innerHTML = "";
-  updateTotals();
-});
-
-/* ===========================
-   INIT SCRIPT
-=========================== */
-document.addEventListener("DOMContentLoaded", () => {
-  removeCaratOptions();
-  removePlusMinusButtons();
-  updateTotals();
-});
-
 </script>
 
-  <script src="cart.js"></script>
+<script src="cart.js"></script>
 </body>
 </html>
+
 
 
 
