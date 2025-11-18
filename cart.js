@@ -90,21 +90,32 @@
     updateTotals(items);
   }
 
-  function updateTotals(items){
-    items = items || Object.values(loadCart() || {});
-    const { totalKg, totalAmount } = computeTotals(items);
-    const totalItemsEl = document.getElementById('totalItems');
-    const totalKgEl = document.getElementById('totalKg');
-    const grandEl = document.getElementById('grandTotal');
-    const headerCount = document.getElementById('cartCount');
-    const fabCount = document.getElementById('cartFabCount');
+function updateTotals(items) {
+  let totalKg = 0;
+  let totalAmount = 0;
 
-    if (totalItemsEl) totalItemsEl.textContent = String(items.length || 0);
-    if (totalKgEl) totalKgEl.textContent = String(totalKg || 0);
-    if (grandEl) grandEl.textContent = (totalAmount || 0).toFixed(2);
-    if (headerCount) headerCount.textContent = String(items.length || 0);
-    if (fabCount) fabCount.textContent = String(items.length || 0);
+  items.forEach(it => {
+    totalKg += Number(it.qtyKg);
+    totalAmount += Number(it.qtyKg) * Number(it.price);
+  });
+
+  // ⭐ Discount: 5% over 60 kg
+  const discountBox = document.getElementById("discountMessage");
+
+  if (totalKg > 60) {
+    const discount = totalAmount * 0.05;
+    totalAmount -= discount;
+    discountBox.textContent = "🎉 5% Discount Applied!";
+  } else {
+    discountBox.textContent = "";
   }
+
+  // Update UI
+  document.getElementById("totalItems").textContent = items.length;
+  document.getElementById("totalKg").textContent = totalKg;
+  document.getElementById("grandTotal").textContent = totalAmount.toFixed(2);
+}
+
 
   // Remove item
   function handleRemove(sku){
@@ -243,14 +254,48 @@ list.addEventListener("keydown", e => {
 list.addEventListener("blur", updateQty, true);
 
 // ⭐ Live typing (no refresh, no render)
+// ⭐ Update quantity on blur or Enter
+function applyQtyUpdate(input) {
+  let v = input.value.replace(/[^\d]/g, "");
+  if (v === "" || Number(v) < 1) v = "1";
+  input.value = v;
+
+  const sku = input.dataset.sku;
+  const cart = loadCart();
+
+  if (!cart[sku]) return;
+
+  cart[sku].qtyKg = Number(v);
+  saveCart(cart);
+
+  render(); // update totals + item price
+}
+
+// ⭐ Live typing (no render)
 list.addEventListener("input", e => {
   if (e.target.classList.contains("qty-input")) {
-    // clean input instantly
     let v = e.target.value.replace(/[^\d]/g, "");
     if (v === "" || Number(v) < 1) v = "1";
-    e.target.value = v;
+    e.target.value = v; // smooth typing
   }
 });
+
+// ⭐ ENTER key (PC)
+list.addEventListener("keydown", e => {
+  if (e.key === "Enter" && e.target.classList.contains("qty-input")) {
+    e.preventDefault();
+    applyQtyUpdate(e.target);
+    e.target.blur();
+  }
+});
+
+// ⭐ BLUR (mobile or PC when clicking away)
+list.addEventListener("blur", e => {
+  if (e.target.classList.contains("qty-input")) {
+    applyQtyUpdate(e.target);
+  }
+}, true);
+
 
 
     // Clear cart
@@ -296,4 +341,5 @@ list.addEventListener("input", e => {
   // debug helpers
   window.__cartDebug = { loadCart, saveCart, render, clearCart };
 })();
+
 
