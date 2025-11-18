@@ -779,142 +779,69 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
     height: 150px; 
   }
 }
-<style>
-
-/* ⭐ FLOATING CART BUTTON */
-#floatingCartBtn {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  background: #2f9e44;
-  color: #fff;
-  padding: 14px 20px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-  z-index: 9999;
-  cursor: pointer;
-}
-
-#floatingCartBtn span {
-  background: white;
-  color: #2f9e44;
-  padding: 2px 8px;
-  border-radius: 50%;
-  font-weight: 700;
-}
-
-/* ⭐ ANIMATION FOR TOTAL PRICE */
-@keyframes smoothCount {
-  from { opacity: 0.3; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-.animate-total {
-  animation: smoothCount 0.25s ease-out;
-}
-
-</style>
 
 
 
 </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+</head>
+<body>
+    <!-- Mobile / PWA friendly meta (paste into <head>) -->
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#2f9e44">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<title>SDB Plantation — Cart</title>
-
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<div class="wrap">
-
+  <div class="wrap">
     <header>
-        <h2>Your Cart</h2>
-        <div><a href="/" class="small">Continue shopping</a></div>
+      <h2>Your Cart</h2>
+      <div><a href="/" class="small">Continue shopping</a></div>
     </header>
 
-    <!-- CART ITEMS WILL LOAD HERE -->
     <div id="cartList"></div>
 
-
-    <!-- CUSTOMER DETAILS -->
     <section style="margin-top:14px;border:1px solid #f0f0f0;padding:12px;border-radius:10px">
-        <h3>Customer details</h3>
-
-        <div>
-            <label for="custName">Name *</label>
-            <input id="custName" class="input" placeholder="Your full name">
-        </div>
-
-        <div style="margin-top:8px">
-            <label for="custPhone">Phone / WhatsApp *</label>
-            <input id="custPhone" class="input" placeholder="+91">
-        </div>
-
-        <div style="margin-top:8px">
-            <label for="custAddress">Delivery address *</label>
-            <textarea id="custAddress" class="input" rows="3" placeholder="Full delivery address"></textarea>
-        </div>
-
-        <div class="note">
-            Minimum order 10 kg. For urgent orders call: 
-            <a href="tel:+918553334247">+91 85533 34247</a>
-        </div>
+      <h3>Customer details</h3>
+      <div>
+        <label for="custName">Name *</label>
+        <input id="custName" class="input" placeholder="Your full name">
+      </div>
+      <div style="margin-top:8px">
+        <label for="custPhone">Phone / WhatsApp *</label>
+        <input id="custPhone" class="input" placeholder="+91">
+      </div>
+      <div style="margin-top:8px">
+        <label for="custAddress">Delivery address *</label>
+        <textarea id="custAddress" class="input" rows="3" placeholder="Full delivery address"></textarea>
+      </div>
+      <div class="note">Minimum order 10 kg. For urgent orders call or WhatsApp: <a href="tel:+918553334247">+91 85533 34247</a></div>
     </section>
 
-
-    <!-- TOTALS -->
     <div class="totals">
-        <div class="small">Total items: <span id="totalItems">0</span></div>
-        <div class="small">Total kg: <span id="totalKg">0</span> kg</div>
-        <div class="small">Grand total: ₹ <span id="grandTotal">0.00</span></div>
+      <div class="small">Total items: <span id="totalItems">0</span></div>
+      <div class="small">Total kg: <span id="totalKg">0</span> kg</div>
+      <div class="small">Grand total: ₹ <span id="grandTotal">0.00</span></div>
+      <div class="actions">
+        <button id="checkoutBtn" class="btn">Place Order</button>
+        <button id="checkoutWhats" class="btn" style="background:#128C7E">Confirm via WhatsApp</button>
+        <button id="clearBtn" class="btn" style="background:transparent;color:#2f9e44;border:1px solid #2f9e44">Clear cart</button>
+      </div>
+<p id="orderMsg"
+   style="
+     margin-top:14px;
+     font-size:22px;
+     font-weight:900;
+     color:#2f9e44;
+     text-align:center;
+   ">
+</p>
 
-        <div id="discountMessage" style="color:green;font-size:1.4rem;font-weight:700;margin-top:10px;"></div>
-
-        <div class="actions">
-            <button id="checkoutBtn" class="btn">Place Order</button>
-            <button id="checkoutWhats" class="btn" style="background:#128C7E">Confirm via WhatsApp</button>
-            <button id="clearBtn" class="btn" style="background:transparent;color:#2f9e44;border:1px solid #2f9e44">
-                Clear cart
-            </button>
-        </div>
-
-        <p id="orderMsg"
-            style="margin-top:14px;font-size:22px;font-weight:900;color:#2f9e44;text-align:center;">
-        </p>
     </div>
 
-
-    <!-- FOOTER -->
     <footer style="margin-top:24px">
-        <div class="small">
-            SDB Plantation · near 195 Sri Navdurga Temple Mohan Raj Layout Sathnur Village,
-            Bengaluru, Karnataka<br>
-            <a href="https://wa.me/918553334247">WhatsApp</a> · 
-            <a href="mailto:sdbplantation@gmail.com">sdbplantation@gmail.com</a>
-        </div>
+      <div class="small">SDB Plantation ·  near 163 Sri navdurga temple mohan Raj layout sathnur village<br>
+            jala hobli, srinivaspur, Sathanur, Bengaluru, Karnataka<br> · <a href="https://wa.me/918553334247">WhatsApp</a> · <a href="mailto:sdbplantation@gmail.com">sdbplantation@gmail.com</a></div>
     </footer>
-    <div id="floatingCartBtn" onclick="window.location.href='/cart'">
-  🛒 Cart <span id="floatingCount">0</span>
-</div>
-
-
-</div>
-
-</body>
-</html>
-
+  </div>
 <script>
 /* Small mobile UX: ensure elements are scrolled into view when input focused */
 (function(){
@@ -929,16 +856,22 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
 })();
 
 (function(){
-  const cartContainerSelector = '#cartContainer';
-  const cartItemSelector = '.cart-item';
-  const qtyInputSelector = 'input[type="number"], .item-qty';
-  const clearBtnSelector = '#clearCartBtn, .clear-cart';
+  // --- CONFIG: change if your cart wrapper / item classes are different ---
+  const cartContainerSelector = '#cartContainer'; // wrapper that contains .cart-item nodes
+  const cartItemSelector = '.cart-item';          // each product row
+  const qtyInputSelector = 'input[type="number"], .item-qty'; // quantity inputs (number or class)
+  const clearBtnSelector = '#clearCartBtn, .clear-cart'; // Clear Cart button(s)
 
+  // Utility
   const $ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
   const removeEl = (el) => el && el.remove && el.remove();
 
+  // 1) Remove buttons that are visually + or - next to quantity inputs
   function removePlusMinusButtons() {
+    // remove by common class names
     $('.qty-plus, .qty-minus, .quantity-btn, .qty-controls, .quantity-buttons').forEach(removeEl);
+
+    // Remove any button or element whose text is exactly '+' or '-' (trimmed)
     const possible = $('button, .btn, .quantity-action, .qty-action, a');
     possible.forEach(el => {
       if ((el.textContent || '').trim() === '+' || (el.textContent || '').trim() === '-') {
@@ -946,57 +879,84 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
       }
     });
 
+    // Remove sibling elements matching + or - near number inputs
     $(qtyInputSelector).forEach(input => {
       const parent = input.parentElement;
       if (!parent) return;
       Array.from(parent.children).forEach(child => {
-        if (child !== input && ((child.textContent || '').trim() === '+' || (child.textContent || '').trim() === '-')) {
+        if (child === input) return;
+        if ((child.textContent || '').trim() === '+' || (child.textContent || '').trim() === '-') {
           removeEl(child);
         }
       });
     });
   }
 
+  // 2) Ensure quantity inputs exist and are plain number inputs
   function normalizeQtyInputs() {
     $(qtyInputSelector).forEach(input => {
+      // If input is not type number, try to convert to one (preserve value)
       try {
         if (input.tagName.toLowerCase() === 'input') {
-          if (!input.hasAttribute('min')) input.setAttribute('min','0');
+          if (input.getAttribute('type') !== 'number') {
+            input.setAttribute('type', 'number');
+          }
+          // minimum 0
+          if (!input.hasAttribute('min')) input.setAttribute('min', '0');
+        } else {
+          // if it's not an input (e.g., a div showing qty), convert to input
+          const v = (input.textContent || '').trim() || '0';
+          const newInput = document.createElement('input');
+          newInput.type = 'number';
+          newInput.className = input.className || 'item-qty';
+          newInput.value = v.replace(/[^\d]/g,'') || '0';
+          newInput.setAttribute('min','0');
+          input.parentElement.replaceChild(newInput, input);
         }
-      } catch(e) {}
+      } catch(e) {
+        console.warn('normalizeQtyInputs error', e);
+      }
     });
   }
 
-  /* ⭐ FIXED CLEAR CART with Confirm() */
+  // 3) Fix Clear Cart buttons: attach listener and set type="button" to prevent form submit
   function attachClearCart() {
     const clearButtons = $(clearBtnSelector);
     clearButtons.forEach(btn => {
+      // ensure not a form submit
       if (btn.tagName.toLowerCase() === 'button') btn.type = 'button';
-
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-
-        const ask = confirm("Are you sure you want to clear your cart?");
-        if (!ask) return; // ❌ Cancel → do nothing
-
+        // Remove all cart items
         const container = document.querySelector(cartContainerSelector) || document.body;
         const items = container.querySelectorAll(cartItemSelector);
+        if (items.length === 0) {
+          alert('Cart is already empty.');
+          return;
+        }
         items.forEach(it => it.remove());
-
-        updateTotals();
+        // Optionally update any cart totals displayed on the page:
+        const totalEls = document.querySelectorAll('#cartTotal, .cart-total, .total-amount');
+        totalEls.forEach(el => el.textContent = '₹0.00');
+        // show empty message if you have one
+        const emptyMsg = document.getElementById('cartEmptyMessage');
+        if (emptyMsg) emptyMsg.style.display = 'block';
       });
     });
   }
 
+  // Run everything
   function init() {
     removePlusMinusButtons();
     normalizeQtyInputs();
     attachClearCart();
   }
 
+  // Run now and on DOMContentLoaded
   document.addEventListener('DOMContentLoaded', init);
   init();
 
+  // If cart items are added dynamically later, observe and remove plus/minus automatically
   const container = document.querySelector(cartContainerSelector) || document.body;
   const obs = new MutationObserver(() => {
     removePlusMinusButtons();
@@ -1007,60 +967,10 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
 })();
 
 
-
-/* ⭐⭐⭐ ADDED BY CHATGPT — YOUR REQUESTED FEATURES ⭐⭐⭐ */
-
-/* 1️⃣ SIMPLE QUANTITY INPUT (LIKE PHONE INPUT) */
-document.addEventListener("input", (e) => {
-  if (e.target.classList.contains("qty-input")) {
-    e.target.value = e.target.value.replace(/[^\d]/g, "");  // only digits
-    if (e.target.value === "") e.target.value = "0";
-    updateTotals();
-  }
-});
-
-/* 2️⃣ CALCULATE TOTALS + 5% DISCOUNT */
-function updateTotals() {
-  let totalItems = 0;
-  let totalKg = 0;
-  let grandTotal = 0;
-
-  document.querySelectorAll(".qty-input").forEach(input => {
-    const qty = Number(input.value) || 0;
-    const price = Number(input.dataset.price) || 0;
-
-    if (qty > 0) totalItems++;
-
-    totalKg += qty;
-    grandTotal += qty * price;
-  });
-
-  const discountMsg = document.getElementById("discountMessage");
-
-  if (totalKg > 60) {
-    let discount = grandTotal * 0.05;
-    grandTotal -= discount;
-    discountMsg.textContent = "🎉 WOW! You got 5% discount for ordering more than 60 KG!";
-  } else {
-    discountMsg.textContent = "";
-  }
-
-  document.getElementById("totalItems").textContent = totalItems;
-  document.getElementById("totalKg").textContent = totalKg;
-  document.getElementById("grandTotal").textContent = grandTotal.toFixed(2);
-}
-
 </script>
-
-<script src="cart.js"></script>
+  <script src="cart.js"></script>
 </body>
 </html>
-
-
-
-
-
-
 
 
 
