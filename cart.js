@@ -209,17 +209,49 @@
     });
 
     // manual qty input (delegated)
-    list.addEventListener('input', (e) => {
-      if (e.target && e.target.classList && e.target.classList.contains('qty-input')) {
-        const sku = e.target.dataset.sku;
-        let v = Number(e.target.value);
-        if (!v || v < 1) v = 1;
-        const cart = loadCart();
-        if (!cart[sku]) return;
-        cart[sku].qtyKg = v;
-        saveCart(cart); // render() will be called by saveCart
-      }
-    });
+  // ⭐ Handle quantity like phone number input
+function updateQty(e) {
+  const input = e.target;
+  if (!input.classList.contains("qty-input")) return;
+
+  // clean input (numbers only)
+  let v = input.value.replace(/[^\d]/g, "");
+  if (v === "" || Number(v) < 1) v = "1";
+  input.value = v;
+
+  const sku = input.dataset.sku;
+  const cart = loadCart();
+  if (!cart[sku]) return;
+
+  cart[sku].qtyKg = Number(v);
+  saveCart(cart);
+
+  // update only totals + price of item
+  render();
+}
+
+// ⭐ PC: Press Enter → update immediately
+list.addEventListener("keydown", e => {
+  if (e.key === "Enter" && e.target.classList.contains("qty-input")) {
+    e.preventDefault();
+    updateQty(e);
+    e.target.blur(); // remove cursor
+  }
+});
+
+// ⭐ Mobile/PC: When leaving the box → update price
+list.addEventListener("blur", updateQty, true);
+
+// ⭐ Live typing (no refresh, no render)
+list.addEventListener("input", e => {
+  if (e.target.classList.contains("qty-input")) {
+    // clean input instantly
+    let v = e.target.value.replace(/[^\d]/g, "");
+    if (v === "" || Number(v) < 1) v = "1";
+    e.target.value = v;
+  }
+});
+
 
     // Clear cart
     const clearBtn = document.getElementById('clearBtn');
@@ -264,3 +296,4 @@
   // debug helpers
   window.__cartDebug = { loadCart, saveCart, render, clearCart };
 })();
+
